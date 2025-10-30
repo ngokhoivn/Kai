@@ -38,24 +38,22 @@
             color: var(--text-light);
             min-height: 100vh;
             padding: 10px;
-            padding-left: 160px; /* For character selection bar */
             position: relative;
             overflow-x: hidden;
         }
 
         #character-selection {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 150px;
-            height: 100%;
+            width: 100%;
             background: rgba(0, 0, 0, 0.5);
             backdrop-filter: blur(10px);
             padding: 10px;
             display: flex;
-            flex-direction: column;
-            overflow-y: auto;
+            flex-direction: row;
+            overflow-x: auto;
             gap: 10px;
+            margin-top: 16px;
+            border-radius: 12px;
+            border: 1px solid var(--glass-border);
         }
 
         #character-selection::-webkit-scrollbar {
@@ -454,16 +452,6 @@
         @media (max-width: 768px) {
             body {
                 padding-left: 10px; /* Reset padding for mobile */
-                padding-bottom: 100px; /* Add space for bottom character bar */
-            }
-
-            #character-selection {
-                top: auto;
-                bottom: 0;
-                width: 100%;
-                height: auto;
-                flex-direction: row;
-                overflow-x: auto;
             }
 
             .container {
