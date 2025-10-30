@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kaiwa App - 会話トレーニング</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --bg-dark: #0a0a0a;
+            --bg-card: #1a1a1a;
+            --bg-card-light: #242424;
+            --text-light: #ffffff;
+            --text-muted: #b3b3b3;
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --primary-light: #818cf8;
+            --accent: #06d6a0;
+            --accent-dark: #048a5f;
+            --error: #ef4444;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --border: #374151;
+            --glow: rgba(99, 102, 241, 0.3);
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+            color: var(--text-light);
+            min-height: 100vh;
+            padding: 10px;
+            padding-left: 160px; /* For character selection bar */
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        #character-selection {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 150px;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            gap: 10px;
+        }
+
+        #character-selection::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        #character-selection::-webkit-scrollbar-track {
+            background: var(--glass-bg);
+        }
+
+        #character-selection::-webkit-scrollbar-thumb {
+            background-color: var(--primary);
+            border-radius: 10px;
+            border: 2px solid var(--glass-bg);
+        }
+
+        #character-selection::-webkit-scrollbar-thumb:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border-radius: 16px;
+            padding: 16px;
+            border: 1px solid var(--glass-border);
+            box-shadow: 
+                0 25px 60px rgba(0, 0, 0, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            position: relative;
+            min-height: calc(100vh - 20px);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 16px;
+        }
+        
+        .header h1 {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 1.8em;
+            margin-bottom: 4px;
+            font-weight: 800;
+        }
+
+        .header p {
+            color: var(--text-muted);
+            font-size: 0.9em;
+        }
+
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            gap: 16px;
+        }
+
+        .btn-home {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px 16px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            gap: 6px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 2px 10px var(--glow);
+        }
+
+        .btn-home:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 15px var(--glow);
+        }
+
+        .progress-container {
+            flex: 1;
+            background: var(--glass-bg);
+            border-radius: 12px;
+            padding: 8px 12px;
+            border: 1px solid var(--glass-border);
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 4px;
+            font-size: 0.75em;
+            color: var(--text-muted);
+        }
+
+        .progress-stats {
+            display: flex;
+            gap: 12px;
+            font-size: 0.75em;
+        }
+
+        .progress-stat {
+            display: flex;
+            align-items: center;
+            gap: 3px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: var(--bg-dark);
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 20px;
+            transition: width 0.5s ease;
+        }
+
+        .game-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .character-profile {
+            background: linear-gradient(135deg, var(--bg-card), var(--bg-card-light));
+            padding: 16px;
+            border-radius: 12px;
+            border: 1px solid var(--glass-border);
+            display: flex;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .character-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            flex-shrink: 0;
+        }
+
+        .character-info {
+            flex: 1;
+        }
+
+        .character-name {
+            font-size: 1.4em;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--primary-light);
+        }
+
+        .character-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 8px;
+            font-size: 0.9em;
+        }
+
+        .detail-item {
+            display: flex;
+            gap: 6px;
+        }
+
+        .detail-label {
+            color: var(--text-muted);
+        }
+
+        .conversation-area {
+            background: linear-gradient(135deg, var(--bg-card), var(--bg-card-light));
+            padding: 16px;
+            border-radius: 12px;
+            border: 1px solid var(--glass-border);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .question-box {
+            background: rgba(99, 102, 241, 0.1);
+            padding: 16px;
+            border-radius: 12px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .question-text {
+            font-size: 1.2em;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .question-translation {
+            color: var(--text-muted);
+            font-style: italic;
+            font-size: 0.9em;
+        }
+
+        .answer-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+        }
+
+        .answer-option {
+            background: var(--glass-bg);
+            padding: 12px 16px;
+            border-radius: 8px;
+            border: 1px solid var(--glass-border);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .answer-option:hover {
+            background: rgba(99, 102, 241, 0.2);
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .answer-option.correct {
+            background: rgba(16, 185, 129, 0.2);
+            border-color: var(--success);
+        }
+
+        .answer-option.incorrect {
+            background: rgba(239, 68, 68, 0.2);
+            border-color: var(--error);
+        }
+
+        /* New styles for block-based answers */
+        .sentence-builder {
+            background: var(--glass-bg);
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid var(--glass-border);
+            margin: 16px 0;
+        }
+
+        .sentence-preview {
+            background: var(--bg-dark);
+            padding: 16px;
+            border-radius: 8px;
+            border: 2px solid var(--border);
+            min-height: 60px;
+            margin-bottom: 16px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .word-block {
+            background: var(--primary);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .word-block:hover {
+            background: var(--primary-light);
+            transform: translateY(-2px);
+        }
+
+        .word-block.selected {
+            background: var(--accent);
+        }
+
+        .word-block.incorrect {
+            background: var(--error);
+        }
+
+        .word-blocks-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .empty-slot {
+            display: inline-block;
+            width: 80px;
+            height: 20px;
+            border-bottom: 2px dashed var(--text-muted);
+            margin: 0 5px;
+        }
+
+        .controls {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-top: 16px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-next {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            box-shadow: 0 2px 10px var(--glow);
+        }
+
+        .btn-next:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px var(--glow);
+        }
+
+        .btn-check {
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            color: white;
+            box-shadow: 0 2px 10px rgba(6, 214, 160, 0.3);
+        }
+
+        .btn-check:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(6, 214, 160, 0.4);
+        }
+
+        .result {
+            text-align: center;
+            padding: 12px;
+            border-radius: 12px;
+            font-weight: 700;
+            transition: all 0.5s ease;
+            transform: scale(0.9);
+            opacity: 0;
+            border: 1px solid var(--glass-border);
+        }
+
+        .result.show {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .result.correct {
+            background: linear-gradient(135deg, var(--success), #059669);
+            color: white;
+        }
+
+        .result.incorrect {
+            background: linear-gradient(135deg, var(--error), #dc2626);
+            color: white;
+        }
+
+        .btn-speak {
+            background: transparent;
+            border: 1px solid var(--glass-border);
+            color: var(--text-muted);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-left: 10px;
+        }
+
+        .btn-speak:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding-left: 10px; /* Reset padding for mobile */
+            }
+
+            #character-selection {
+                top: auto;
+                bottom: 0;
+                width: 100%;
+                height: auto;
+                flex-direction: row;
+                overflow-x: auto;
+            }
+
+            .container {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="top-bar">
+            <a href="index.html" class="btn-home">
+                <i class="fas fa-home"></i>
+                Trang chủ
+            </a>
+            
+            <div class="progress-container">
+                <div class="progress-header">
+                    <span>Tiến độ học tập</span>
+                    <div class="progress-stats">
+                        <div class="progress-stat">
+                            <i class="fas fa-trophy"></i>
+                            <span id="score">0</span>
+                        </div>
+                        <div class="progress-stat">
+                            <i class="fas fa-fire"></i>
+                            <span id="streak">0</span>
+                        </div>
+                        <div class="progress-stat">
+                            <i class="fas fa-book"></i>
+                            <span id="current-question">1</span>/<span id="total-questions">5</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill" style="width: 20%"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="header">
+            <h1>会話トレーニング (Kaiwa Training)</h1>
+            <p>Chọn các khối từ để xây dựng câu trả lời phù hợp</p>
+        </div>
+        
+        <div class="game-area">
+            <div class="character-profile" id="character-profile">
+                <!-- Character info will be loaded here -->
+            </div>
+            
+            <div class="conversation-area">
+                <div class="question-box">
+                    <div class="question-text" id="question-text">お仕事は何ですか？</div>
+                    <button class="btn-speak" id="speak-question-btn"><i class="fas fa-volume-up"></i></button>
+                    <div class="question-translation" id="question-translation">Bạn làm nghề gì?</div>
+                </div>
+                
+                <div class="sentence-builder">
+                    <div class="sentence-preview" id="sentence-preview">
+                        <!-- Selected word blocks will appear here -->
+                    </div>
+                    
+                    <div class="word-blocks-container" id="word-blocks-container">
+                        <!-- Word blocks will be loaded here -->
+                    </div>
+                </div>
+                
+                <div class="result" id="result"></div>
+                
+                <div class="controls">
+                    <button class="btn btn-check" id="check-btn">
+                        <i class="fas fa-check"></i>
+                        Kiểm tra
+                    </button>
+                    <button class="btn btn-next" id="next-btn">
+                        <i class="fas fa-arrow-right"></i>
+                        Câu tiếp theo
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <script src="data/scripts.js"></script>
+
+        <script src="data/characters.js"></script>
+
+        <script src="data/questions.js"></script>
+
+    
+
+        <div id="character-selection"></div>
+
+    </body>
+</html>
