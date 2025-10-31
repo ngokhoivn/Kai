@@ -51,7 +51,8 @@ const elements = {
     nextBtn: document.getElementById('next-btn'),
     checkBtn: document.getElementById('check-btn'),
     progressFill: document.getElementById('progress-fill'),
-    speakQuestionBtn: document.getElementById('speak-question-btn')
+    speakQuestionBtn: document.getElementById('speak-question-btn'),
+    toggleHintsCheckbox: document.getElementById('toggle-hints-checkbox')
 };
 
 // Initialize the game UI
@@ -71,6 +72,13 @@ function setupEventListeners() {
     elements.speakQuestionBtn.addEventListener('click', () => {
         const questionText = elements.questionText.textContent;
         speak(questionText);
+    });
+    elements.toggleHintsCheckbox.addEventListener('change', () => {
+        if (elements.toggleHintsCheckbox.checked) {
+            elements.wordBlocksContainer.style.display = 'flex';
+        } else {
+            elements.wordBlocksContainer.style.display = 'none';
+        }
     });
 }
 
@@ -95,7 +103,6 @@ function loadQuestion() {
     elements.totalQuestions.textContent = kaiwaData.length;
     elements.result.className = 'result';
     elements.result.textContent = '';
-    elements.nextBtn.style.display = 'none';
     elements.checkBtn.style.display = 'flex';
     
     updateProgressBar();
@@ -205,9 +212,6 @@ function checkAnswer() {
     } else {
         handleIncorrectAnswer();
     }
-    
-    elements.checkBtn.style.display = 'none';
-    elements.nextBtn.style.display = 'none';
 }
 
 function handleCorrectAnswer() {
@@ -234,10 +238,6 @@ function handleCorrectAnswer() {
     });
 
     updateScoreBoard();
-
-    setTimeout(() => {
-        nextQuestion();
-    }, 2000);
 }
 
 function handleIncorrectAnswer() {
@@ -300,7 +300,6 @@ function restartGame() {
     currentAnswerStructure = [];
     updateScoreBoard();
     loadQuestion();
-    elements.nextBtn.style.display = 'none';
     elements.checkBtn.style.display = 'flex';
 }
 

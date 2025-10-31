@@ -41,6 +41,30 @@ function generateQuestions(character) {
             translation: 'Người này hiện tại làm công việc gì?',
             correctOrder: ['いまのしごと は', character.details['今の仕事 (いまのしごと)'], 'です。'],
             blocks: ['いまのしごと は', character.details['今の仕事 (いまのしごと)'], 'です。']
+        },
+        {
+            question: `このひと の すんでいるところ は どこですか？`, // Where does this person live?
+            translation: 'Người này sống ở đâu?',
+            correctOrder: ['すんでいるところ は', character.details['現在 (げんざい)'], 'です。'],
+            blocks: ['すんでいるところ は', character.details['現在 (げんざい)'], 'です。']
+        },
+        {
+            question: `このひと の かぞく は だれですか？`, // Who is in this person's family?
+            translation: 'Gia đình người này gồm những ai?',
+            correctOrder: ['かぞく は', character.details['家族 (かぞく)'], 'です。'],
+            blocks: ['かぞく は', character.details['家族 (かぞく)'], 'です。']
+        },
+        {
+            question: `このひと の かぞく は なんにんですか？`, // How many people are in this person's family?
+            translation: 'Gia đình người này có mấy người?',
+            correctOrder: ['かぞく は', character.details['家族の人数 (かぞくのにんずう)'], 'です。'],
+            blocks: ['かぞく は', character.details['家族の人数 (かぞくのにんずう)'], 'です。']
+        },
+        {
+            question: `このひと の しゅうみ は なんですか？`, // What is this person's hobby?
+            translation: 'Sở thích của người này là gì?',
+            correctOrder: ['しゅうみ は', character.details['趣味 (しゅみ)'], 'です。'],
+            blocks: ['しゅうみ は', character.details['趣味 (しゅみ)'], 'です。']
         }
     ];
 

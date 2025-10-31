@@ -473,6 +473,59 @@
             transform: scale(0.9);
         }
 
+        .controls-interactive {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 28px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 28px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 20px;
+            width: 20px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: var(--primary);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(22px);
+        }
+
         /* === RESPONSIVE === */
         @media (min-width: 768px) {
             .top-bar {
@@ -579,6 +632,13 @@
                     <div class="sentence-preview" id="sentence-preview">
                         <span class="empty-slot"></span>
                     </div>
+                    <div class="controls-interactive">
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="toggle-hints-checkbox" checked>
+                            <span class="slider"></span>
+                        </label>
+                        <label for="toggle-hints-checkbox">Hiện gợi ý</label>
+                    </div>
                     <div class="word-blocks-container" id="word-blocks-container"></div>
                 </div>
 
@@ -588,7 +648,7 @@
                     <button class="btn btn-check" id="check-btn">
                         <i class="fas fa-check"></i> Kiểm tra
                     </button>
-                    <button class="btn btn-next" id="next-btn" style="display: none;">
+                    <button class="btn btn-next" id="next-btn">
                         <i class="fas fa-arrow-right"></i> Tiếp theo
                     </button>
                 </div>
