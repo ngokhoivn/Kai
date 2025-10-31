@@ -104,6 +104,7 @@ function loadQuestion() {
     elements.result.className = 'result';
     elements.result.textContent = '';
     elements.checkBtn.style.display = 'flex';
+    elements.nextBtn.style.display = 'flex';
     
     updateProgressBar();
 }
@@ -238,6 +239,10 @@ function handleCorrectAnswer() {
     });
 
     updateScoreBoard();
+
+    setTimeout(() => {
+        nextQuestion();
+    }, 1000);
 }
 
 function handleIncorrectAnswer() {
@@ -266,6 +271,7 @@ function handleIncorrectAnswer() {
     });
 
     updateScoreBoard();
+    elements.nextBtn.style.display = 'flex';
 }
 
 function nextQuestion() {
@@ -301,6 +307,7 @@ function restartGame() {
     updateScoreBoard();
     loadQuestion();
     elements.checkBtn.style.display = 'flex';
+    elements.nextBtn.style.display = 'flex';
 }
 
 function updateScoreBoard() {
