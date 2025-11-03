@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     const kanjiDisplay = document.getElementById('kanjiDisplay');
+    const kanjiText = document.getElementById('kanjiText');
     const answerInput = document.getElementById('answerInput');
     const checkAnswerBtn = document.getElementById('checkAnswer');
     const skipWordBtn = document.getElementById('skipWord');
@@ -9,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const cycleText = document.getElementById('cycleText');
     const progressBarFill = document.querySelector('.progress-bar-fill');
     const restartLearningBtn = document.getElementById('restartLearning');
+    const speakBtn = document.getElementById('speakBtn');
 
     let vocabulary = [];
     let currentIndex = 0;
@@ -77,6 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (currentWord.meaning) {
                 meaningDisplay.textContent = currentWord.meaning;
             }
+            speak(currentWord.hiragana); // Speak the word
             setTimeout(() => {
                 moveToNextWord();
                 isChecking = false;
@@ -119,9 +122,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Function to show the current word
     function showCurrentWord() {
         if (currentIndex < vocabulary.length) {
-            kanjiDisplay.textContent = vocabulary[currentIndex].kanji;
+            kanjiText.textContent = vocabulary[currentIndex].kanji;
         } else {
-            kanjiDisplay.textContent = '';
+            kanjiText.textContent = '';
         }
     }
 
@@ -163,6 +166,17 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // Function to speak text
+    function speak(text) {
+        if ('speechSynthesis' in window) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'ja-JP';
+            window.speechSynthesis.speak(utterance);
+        } else {
+            alert('Trình duyệt của bạn không hỗ trợ phát âm.');
+        }
+    }
+
     // Initial load
     const lesson = getLessonFromURL();
     if (lesson) {
@@ -184,6 +198,13 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.key === 'Enter') {
             e.preventDefault();
             checkAnswer();
+        }
+    });
+
+    speakBtn.addEventListener('click', () => {
+        const currentWord = vocabulary[currentIndex];
+        if (currentWord) {
+            speak(currentWord.hiragana);
         }
     });
 });
