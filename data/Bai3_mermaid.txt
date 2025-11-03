@@ -1,0 +1,41 @@
+flowchart TD
+    %% スタイル定義
+    classDef person fill:#e1f5fe,stroke:#0277bd,stroke-width:3px,color:#01579b,font-weight:bold
+    classDef info fill:#fff9c4,stroke:#f57f17,stroke-width:2px,color:#f57f17,font-weight:600
+    classDef place fill:#e8f5e8,stroke:#2e7d28,stroke-width:2px,color:#1b5e20,font-weight:600
+
+    %% たなかさん
+    A1["👩 たなかみか<br/>🇯🇵 35さい"]:::person
+    A1 --> A2["せが たかい<br/>かみが ながい<br/>あかるい ひと"]:::info
+    A2 --> A3["ふくおか → きょうと<br/>しずかです<br/>たべものが おいしい"]:::place
+    A3 --> A4["ITの かいしゃ<br/>あたらしい ビル<br/>ひろい オフィス"]:::place
+
+    %% ヒエウさん
+    B1["👨 ヒエウ<br/>🇻🇳 24さい"]:::person
+    B1 --> B2["せが ふつう<br/>げんきな ひと<br/>つよい からだ"]:::info
+    B2 --> B3["ハノイ → おおさか<br/>にぎやか<br/>たのしい まち"]:::place
+    B3 --> B4["こうじょう<br/>おおきい<br/>きれい"]:::place
+
+    %% バーリさん
+    C1["👦 バーリ<br/>🇮🇳 17さい"]:::person
+    C1 --> C2["せが ひくい<br/>めが おおきい<br/>しずかな ひと"]:::info
+    C2 --> C3["ムンバイ → とうきょう<br/>ひとが おおい<br/>あつい"]:::place
+    C3 --> C4["がっこう<br/>ふるい<br/>ちいさい クラス"]:::place
+
+    %% リンさん
+    D1["👩 リン<br/>🇨🇳 22さい"]:::person
+    D1 --> D2["せが ふつう<br/>はだが きれい<br/>あたまが いい"]:::info
+    D2 --> D3["ペキン → ひろしま<br/>ふるい まち<br/>しずか"]:::place
+    D3 --> D4["けんきゅうしつ<br/>しずか<br/>あたらしい"]:::place
+
+    %% イーさん
+    E1["👩 イー<br/>🇰🇷 30さい"]:::person
+    E1 --> E2["せが たかい<br/>スタイルが いい<br/>まじめな ひと"]:::info
+    E2 --> E3["ソウル → きょうと<br/>きれいな まち<br/>ふるい おてら"]:::place
+    E3 --> E4["だいがく<br/>おおきい<br/>としょかんが ひろい"]:::place
+
+    %% ピエールさん
+    F1["👨 ピエール<br/>🇫🇷 38さい"]:::person
+    F1 --> F2["せが たかい<br/>ひげが ある<br/>やさしい ひと"]:::info
+    F2 --> F3["パリ → とうきょう<br/>うつくしい まち<br/>ふるい たてもの"]:::place
+    F3 --> F4["レストラン<br/>たかい<br/>ひろい キッチン"]:::place

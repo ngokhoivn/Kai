@@ -1,4 +1,4 @@
-var vocabLesson1 = [
+var Kotoba_Bai1_data = [
     // Quốc tịch & Tuổi
     "Nam=おとこ=Nam",
     "Nữ=おんな=Nữ",

@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="theme-color" content="#0a0a0a">
-    <title>Kaiwa App - Hỏi trực tiếp</title>
+    <title>Kaiwa App - Bài 3</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="css/conversation.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="css/Kaiwa_UI.css">
 </head>
 <body>
     <div class="container">
@@ -29,11 +30,15 @@
             </div>
         </div>
 
+        <div id="character-selection"></div>
+
         <div class="game-area">
+            <div class="character-profile" id="character-profile"></div>
+
             <div class="conversation-area">
                 <div class="question-box">
-                    <div class="question-text" id="question-text"></div>
-                    <div class="question-translation" id="question-translation"></div>
+                    <div class="question-text" id="question-text">このひと は だれですか？</div>
+                    <div class="question-translation" id="question-translation">Người này là ai?</div>
                     <button class="speak-question-btn" id="speak-question-btn">
                         <i class="fas fa-volume-up"></i>
                     </button>
@@ -67,7 +72,8 @@
         </div>
     </div>
 
-    <script src="data/lesson_asking_directly.js"></script>
-    <script src="js/scripts.js"></script>
+    <script src="data/Kaiwa_Bai3_characters.js"></script>
+    <script src="data/Kaiwa_Bai3_questions.js"></script>
+    <script src="js/Kaiwa_Main.js"></script>
 </body>
 </html>
