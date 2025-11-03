@@ -167,14 +167,25 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Function to speak text
-    function speak(text) {
-        if ('speechSynthesis' in window) {
-            const utterance = new SpeechSynthesisUtterance(text);
-            utterance.lang = 'ja-JP';
-            window.speechSynthesis.speak(utterance);
-        } else {
+    function speak(text, lang = 'ja-JP') {
+        if (!('speechSynthesis' in window)) {
             alert('Trình duyệt của bạn không hỗ trợ phát âm.');
+            return;
         }
+
+        window.speechSynthesis.cancel();
+
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = lang;
+        utterance.rate = 0.9;
+
+        const voices = window.speechSynthesis.getVoices();
+        const japaneseVoice = voices.find(voice => voice.lang.includes('ja'));
+        if (japaneseVoice) {
+            utterance.voice = japaneseVoice;
+        }
+
+        window.speechSynthesis.speak(utterance);
     }
 
     // Initial load
