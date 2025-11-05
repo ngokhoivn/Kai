@@ -44,7 +44,7 @@ const all_questions_bai3 = [
     },
     {
         "characterName": "たなかさん (Tanaka-san)",
-        "question": "どんなひとですか。",
+        "question": "このひとは　どんなひとですか。",
         "translation": "Là người như thế nào?",
         "correctOrder": ["せが", "たかくて、", "かみが", "ながくて、", "あかるい", "ひとです。"],
         "blocks": ["せが", "たかくて、", "かみが", "ながくて、", "あかるい", "ひとです。"]
@@ -130,7 +130,7 @@ const all_questions_bai3 = [
     },
     {
         "characterName": "ヒエウさん (Hieu-san)",
-        "question": "どんなひとですか。",
+        "question": "このひとは　どんなひとですか。",
         "translation": "Là người như thế nào?",
         "correctOrder": ["せが", "ふつうで、", "げんきな", "ひとです。"],
         "blocks": ["せが", "ふつうで、", "げんきな", "ひとです。"]
@@ -223,7 +223,7 @@ const all_questions_bai3 = [
     },
     {
         "characterName": "バーリさん (Bali-san)",
-        "question": "どんなひとですか。",
+        "question": "このひとは　どんなひとですか。",
         "translation": "Là người như thế nào?",
         "correctOrder": ["せが", "ひくくて、", "めが", "おおきくて、", "しずかな", "ひとです。"],
         "blocks": ["せが", "ひくくて、", "めが", "おおきくて、", "しずかな", "ひとです。"]
@@ -288,7 +288,7 @@ const all_questions_bai3 = [
     },
     {
         "characterName": "リンさん (Lin-san)",
-        "question": "どんなひとですか。",
+        "question": "このひとは　どんなひとですか。",
         "translation": "Là người như thế nào?",
         "correctOrder": ["せが", "ふつうで、", "はだが", "きれいで、", "あたまが", "いい", "ひとです。"],
         "blocks": ["せが", "ふつうで、", "はだが", "きれいで、", "あたまが", "いい", "ひとです。"]
@@ -353,7 +353,7 @@ const all_questions_bai3 = [
     },
     {
         "characterName": "イーさん (Yi-san)",
-        "question": "どんなひとですか。",
+        "question": "このひとは　どんなひとですか。",
         "translation": "Là người như thế nào?",
         "correctOrder": ["せが", "たかくて、", "スタイルが", "よくて、", "まじめな", "ひとです。"],
         "blocks": ["せが", "たかくて、", "スタイルが", "よくて、", "まじめな", "ひとです。"]
@@ -418,7 +418,7 @@ const all_questions_bai3 = [
     },
     {
         "characterName": "ピエールさん (Pierre-san)",
-        "question": "どんなひとですか。",
+        "question": "このひとは　どんなひとですか。",
         "translation": "Là người như thế nào?",
         "correctOrder": ["せが", "たかくて、", "ひげが", "あって、", "やさしい", "ひとです。"],
         "blocks": ["せが", "たかくて、", "ひげが", "あって、", "やさしい", "ひとです。"]
