@@ -1,0 +1,55 @@
+flowchart TD
+    %% スタイル定義
+    classDef person fill:#667eea,stroke:#4c63d2,stroke-width:3px,color:#fff,font-weight:bold
+    classDef daily fill:#a8edea,stroke:#28a745,stroke-width:2px,color:#333,font-weight:600
+    classDef weather fill:#ffeaa7,stroke:#fdcb6e,stroke-width:2px,color:#333,font-weight:600
+    classDef reason fill:#fd79a8,stroke:#e84393,stroke-width:2px,color:#fff,font-weight:600
+    classDef today fill:#ff9a9e,stroke:#ff6b6b,stroke-width:2px,color:#333,font-weight:600
+
+    %% たなかさん
+    A1["👩 たなかさん"]:::person
+    A1 --> A2["まいにちは でんしゃで<br/>かいしゃに いきます<br/>30分 かかります"]:::daily
+    A2 --> A3["☀️ きょうは てんきがよい<br/>すずしい"]:::weather
+    A3 --> A4["💡 カフェが ちかい"]:::reason
+    A4 --> A4_5["✨ あるくのは たのしい"]:::reason
+    A4_5 --> A5["→ あるいて いきます<br/>40分 かかります"]:::today
+
+    %% ヒエウさん
+    B1["👨 ヒエウさん"]:::person
+    B1 --> B2["まいにちは バスで<br/>こうじょうに いきます<br/>25分 かかります"]:::daily
+    B2 --> B3["🌧️ きょうは あめ<br/>かぜが つよい"]:::weather
+    B3 --> B4["💡 えきが ちかい"]:::reason
+    B4 --> B4_5["✨ でんしゃは あんぜん"]:::reason
+    B4_5 --> B5["→ でんしゃで いきます<br/>20分 かかります"]:::today
+
+    %% バーリさん
+    C1["👦 バーリさん"]:::person
+    C1 --> C2["まいにちは あるいて<br/>学校に いきます<br/>15分 かかります"]:::daily
+    C2 --> C3["☀️ きょうは はれ<br/>あつい"]:::weather
+    C3 --> C4["💡 こうえんが ちかい"]:::reason
+    C4 --> C4_5["✨ こうえんは すずしい"]:::reason
+    C4_5 --> C5["→ こうえんを とおります<br/>30分 かかります"]:::today
+
+    %% リンさん
+    D1["👩 リンさん"]:::person
+    D1 --> D2["まいにちは じてんしゃで<br/>だいがくに いきます<br/>20分 かかります"]:::daily
+    D2 --> D3["☁️ きょうは くもり<br/>さむい"]:::weather
+    D3 --> D4["💡 バスていが ちかい"]:::reason
+    D4 --> D4_5["✨ バスは あたたかい"]:::reason
+    D4_5 --> D5["→ バスで いきます<br/>25分 かかります"]:::today
+
+    %% イーさん
+    E1["👩 イーさん"]:::person
+    E1 --> E2["まいにちは でんしゃで<br/>だいがくに いきます<br/>45分 かかります"]:::daily
+    E2 --> E3["❄️ きょうは ゆき<br/>きれい"]:::weather
+    E3 --> E4["💡 おてらが ちかい"]:::reason
+    E4 --> E4_5["✨ ゆきの おてらは うつくしい"]:::reason
+    E4_5 --> E5["→ あるいて いきます<br/>1時間 かかります"]:::today
+
+    %% ピエールさん
+    F1["👨 ピエールさん"]:::person
+    F1 --> F2["まいにちは あるいて<br/>レストランに いきます<br/>10分 かかります"]:::daily
+    F2 --> F3["🌫️ きょうは あめが ふりそう<br/>いそぐ"]:::weather
+    F3 --> F4["💡 えきが とおい"]:::reason
+    F4 --> F4_5["✨ タクシーは はやい"]:::reason
+    F4_5 --> F5["→ タクシーで いきます<br/>5分 かかります"]:::today
