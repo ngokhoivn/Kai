@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // DOM Elements
     const kanjiDisplay = document.getElementById('kanjiDisplay');
     const kanjiText = document.getElementById('kanjiText');
     const answerInput = document.getElementById('answerInput');
@@ -11,31 +12,45 @@ document.addEventListener('DOMContentLoaded', () => {
     const progressBarFill = document.querySelector('.progress-bar-fill');
     const restartLearningBtn = document.getElementById('restartLearning');
     const speakBtn = document.getElementById('speakBtn');
+    const groupSelectorContainer = document.getElementById('groupSelectorContainer');
+    const groupButtons = document.getElementById('groupButtons');
+    const startGroupLearningBtn = document.getElementById('startGroupLearningBtn');
+    const learningContainer = document.getElementById('learningContainer');
 
-    let vocabulary = [];
+    // State Variables
+    let vocabulary = []; // The current set of words being learned
+    let allVocabulary = []; // All words for the selected lesson
+    let wordGroups = []; // All words divided into groups
     let currentIndex = 0;
     let wrongWords = [];
     let currentCycle = 1;
-    const totalCycles = 1; // Hardcoded for simplicity
+    const totalCycles = 1;
     let isChecking = false;
-    let currentVocabSet = '';
+
+    const WORDS_PER_GROUP = 5;
+
+    // --- Initialization and Setup ---
 
     function getLessonFromURL() {
         const urlParams = new URLSearchParams(window.location.search);
         return urlParams.get('lesson');
     }
 
-    // Function to start learning
-    function startLearning(vocabSet) {
-        currentVocabSet = vocabSet;
-        const vocabData = window[vocabSet];
-
-        if (typeof vocabData === 'undefined') {
-            alert(`Lỗi: Dữ liệu từ vựng '${vocabSet}' không được tải.`);
+    function initialize() {
+        const lesson = getLessonFromURL();
+        if (!lesson) {
+            alert('Không có bài học nào được chọn!');
+            window.location.href = 'index.html';
             return;
         }
 
-        vocabulary = vocabData.map(line => {
+        const vocabData = window[lesson];
+        if (typeof vocabData === 'undefined' || vocabData.length === 0) {
+            alert(`Lỗi: Dữ liệu từ vựng '${lesson}' không được tải hoặc rỗng.`);
+            return;
+        }
+
+        allVocabulary = vocabData.map(line => {
             const parts = line.split('=');
             return {
                 kanji: parts[0].trim(),
@@ -43,13 +58,59 @@ document.addEventListener('DOMContentLoaded', () => {
                 meaning: parts.length > 2 ? parts[2].trim() : ''
             };
         });
+        
+        shuffleArray(allVocabulary);
+        createWordGroups();
+        createGroupSelector();
+        showGroupSelector();
+    }
 
-        if (vocabulary.length === 0) {
-            alert('Không có từ vựng nào được tìm thấy!');
+    function createWordGroups() {
+        wordGroups = [];
+        for (let i = 0; i < allVocabulary.length; i += WORDS_PER_GROUP) {
+            wordGroups.push(allVocabulary.slice(i, i + WORDS_PER_GROUP));
+        }
+    }
+
+    function createGroupSelector() {
+        groupButtons.innerHTML = '';
+        wordGroups.forEach((_, index) => {
+            const button = document.createElement('button');
+            button.textContent = index + 1;
+            button.dataset.groupIndex = index;
+            button.addEventListener('click', () => {
+                button.classList.toggle('selected');
+            });
+            groupButtons.appendChild(button);
+        });
+    }
+
+    // --- UI View Management ---
+
+    function showGroupSelector() {
+        groupSelectorContainer.classList.remove('hidden');
+        learningContainer.classList.add('hidden');
+        // Reset button selections
+        document.querySelectorAll('.group-buttons button.selected').forEach(btn => {
+            btn.classList.remove('selected');
+        });
+    }
+
+    function showLearningContainer() {
+        groupSelectorContainer.classList.add('hidden');
+        learningContainer.classList.remove('hidden');
+    }
+
+
+    // --- Learning Logic ---
+
+    function startLearning(selectedWords) {
+        if (selectedWords.length === 0) {
+            alert('Bạn phải chọn ít nhất một nhóm để học.');
             return;
         }
 
-        // Shuffle vocabulary
+        vocabulary = selectedWords;
         shuffleArray(vocabulary);
 
         currentIndex = 0;
@@ -57,12 +118,15 @@ document.addEventListener('DOMContentLoaded', () => {
         wrongWords = [];
         isChecking = false;
 
+        showLearningContainer();
         updateProgressUI();
         showCurrentWord();
+        answerInput.value = '';
+        resultDisplay.classList.add('hidden');
+        meaningDisplay.textContent = '';
         answerInput.focus();
     }
 
-    // Function to check answer
     function checkAnswer() {
         if (isChecking || currentIndex >= vocabulary.length) return;
 
@@ -79,7 +143,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (currentWord.meaning) {
                 meaningDisplay.textContent = currentWord.meaning;
             }
-            speak(currentWord.hiragana); // Speak the word
+            speak(currentWord.hiragana);
             setTimeout(() => {
                 moveToNextWord();
                 isChecking = false;
@@ -100,16 +164,11 @@ document.addEventListener('DOMContentLoaded', () => {
         resultDisplay.classList.remove('hidden');
     }
 
-    // Function to move to the next word
     function moveToNextWord() {
         currentIndex++;
         if (currentIndex >= vocabulary.length) {
-            currentIndex = 0;
-            currentCycle++;
-            if (currentCycle > totalCycles) {
-                finishLearning();
-                return;
-            }
+            finishLearning();
+            return;
         }
         resultDisplay.classList.add('hidden');
         meaningDisplay.textContent = '';
@@ -119,7 +178,6 @@ document.addEventListener('DOMContentLoaded', () => {
         answerInput.focus();
     }
 
-    // Function to show the current word
     function showCurrentWord() {
         if (currentIndex < vocabulary.length) {
             kanjiText.textContent = vocabulary[currentIndex].kanji;
@@ -128,27 +186,23 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Function to update progress UI
     function updateProgressUI() {
         const total = vocabulary.length;
-        const percentage = total > 0 ? (currentIndex / total) * 100 : 0;
+        const percentage = total > 0 ? ((currentIndex + 1) / total) * 100 : 0;
         progressText.textContent = `${currentIndex + 1}/${total}`;
         cycleText.textContent = `Chu kỳ: ${currentCycle}/${totalCycles}`;
         progressBarFill.style.width = `${percentage}%`;
     }
 
-    // Function to finish learning
     function finishLearning() {
-        let message = 'Chúc mừng! Bạn đã hoàn thành bài học.';
+        let message = 'Chúc mừng! Bạn đã hoàn thành các nhóm từ này.';
         if (wrongWords.length > 0) {
             message += '\n\nCác từ bạn đã sai:\n' + wrongWords.map(word => `${word.kanji} (${word.hiragana})`).join('\n');
         }
         alert(message);
-        // Redirect back to home page after finishing
-        window.location.href = 'index.html';
+        showGroupSelector(); // Go back to group selection
     }
 
-    // Function to skip a word
     function skipWord() {
         if (isChecking) return;
         const currentWord = vocabulary[currentIndex];
@@ -158,7 +212,8 @@ document.addEventListener('DOMContentLoaded', () => {
         moveToNextWord();
     }
 
-    // Function to shuffle an array
+    // --- Utility Functions ---
+
     function shuffleArray(array) {
         for (let i = array.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
@@ -166,45 +221,44 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Function to speak text
     function speak(text, lang = 'ja-JP') {
         if (!('speechSynthesis' in window)) {
-            alert('Trình duyệt của bạn không hỗ trợ phát âm.');
+            console.warn('Trình duyệt của bạn không hỗ trợ phát âm.');
             return;
         }
-
         window.speechSynthesis.cancel();
-
         const utterance = new SpeechSynthesisUtterance(text);
         utterance.lang = lang;
         utterance.rate = 0.9;
-
         const voices = window.speechSynthesis.getVoices();
         const japaneseVoice = voices.find(voice => voice.lang.includes('ja'));
         if (japaneseVoice) {
             utterance.voice = japaneseVoice;
         }
-
         window.speechSynthesis.speak(utterance);
     }
 
-    // Initial load
-    const lesson = getLessonFromURL();
-    if (lesson) {
-        startLearning(lesson);
-    } else {
-        alert('Không có bài học nào được chọn!');
-        window.location.href = 'index.html';
-    }
+    // --- Event Listeners ---
 
-    // Event Listeners
+    startGroupLearningBtn.addEventListener('click', () => {
+        const selectedGroups = document.querySelectorAll('.group-buttons button.selected');
+        let selectedWords = [];
+        selectedGroups.forEach(button => {
+            const groupIndex = parseInt(button.dataset.groupIndex, 10);
+            selectedWords.push(...wordGroups[groupIndex]);
+        });
+
+        startLearning(selectedWords);
+    });
+
     checkAnswerBtn.addEventListener('click', checkAnswer);
     skipWordBtn.addEventListener('click', skipWord);
+    
     restartLearningBtn.addEventListener('click', () => {
-        if (currentVocabSet) {
-            startLearning(currentVocabSet);
-        }
+        // This button now takes the user back to the group selection screen
+        showGroupSelector();
     });
+
     answerInput.addEventListener('keydown', (e) => {
         if (e.key === 'Enter') {
             e.preventDefault();
@@ -213,9 +267,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     speakBtn.addEventListener('click', () => {
-        const currentWord = vocabulary[currentIndex];
-        if (currentWord) {
-            speak(currentWord.hiragana);
+        if (vocabulary[currentIndex]) {
+            speak(vocabulary[currentIndex].hiragana);
         }
     });
+
+    // --- Initial Load ---
+    initialize();
 });
