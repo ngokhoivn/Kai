@@ -50,16 +50,12 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        allVocabulary = vocabData.map(line => {
-            const parts = line.split('=');
-            return {
-                kanji: parts[0].trim(),
-                hiragana: parts[1].trim(),
-                meaning: parts.length > 2 ? parts[2].trim() : ''
-            };
-        });
+        // Data is now an array of objects, so we just assign it
+        allVocabulary = vocabData;
+
+        // Sort by ID to ensure the order is consistent for grouping
+        allVocabulary.sort((a, b) => a.id - b.id);
         
-        shuffleArray(allVocabulary);
         createWordGroups();
         createGroupSelector();
         showGroupSelector();
