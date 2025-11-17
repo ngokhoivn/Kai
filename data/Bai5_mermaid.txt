@@ -1,0 +1,59 @@
+flowchart TD
+    %% Định nghĩa các class với màu sắc
+    classDef title fill:#667eea,stroke:#4c63d2,stroke-width:3px,color:#fff,font-weight:bold,font-size:18px
+    classDef person fill:#764ba2,stroke:#5a3a7d,stroke-width:2px,color:#fff,font-weight:bold
+    classDef activity fill:#ff9a9e,stroke:#ff6b6b,stroke-width:2px,color:#333,font-weight:600
+    classDef location fill:#a8edea,stroke:#28a745,stroke-width:2px,color:#333,font-weight:600
+    classDef feeling fill:#ffeaa7,stroke:#fdcb6e,stroke-width:2px,color:#333,font-weight:600
+    classDef finish fill:#fd79a8,stroke:#e84393,stroke-width:2px,color:#fff,font-weight:600
+    
+    %% Tiêu đề chính
+    root["🎉 しゅうまつの かつどう<br/>Weekfinish Activities"]:::title
+    
+    %% === TANAKA-SAN ===
+    root --> A1["👩 たなかさん<br/>Tanaka-san"]:::person
+    A1 --> A2["⏰ いつもより おそく おきました"]:::activity
+    A2 --> A3["🍜 えきのまえの ラーメンや<br/>さいきん できました<br/> ゆうめいです"]:::location
+    A3 --> A4["👨‍👩‍👧‍👦 かぞくと たべに <br/>いきたい"]:::activity
+    A4 --> A5["😊 にぎやかで おいしい<br/>でも 4にんだと<br/> すこし たかい"]:::feeling
+    A5 --> A6["🔄 また たべに いきたい"]:::finish
+    
+    %% === HIEU-SAN ===
+    root --> B1["👨 ヒエウさん<br/>Hieu-san"]:::person
+    B1 --> B2["😴 きのう おそくねましたた<br/>ゆっくり おきました"]:::activity
+    B2 --> B3["🌳 ちかくの こうえん<br/></n>ピクニックの イベント"]:::location
+    B3 --> B4["🚶 うちから ちかい<br/> とても べんり"]:::activity
+    B4 --> B5["😊 ひとが おおい<br/> くうきが きれい<br/>サンドイッチも おいしい"]:::feeling
+    B5 --> B6["🔄 また いきたい"]:::finish
+    
+    %% === BALI-SAN ===
+    root --> C1["👦 バーリさん<br/>Bali-san"]:::person
+    C1 --> C2["⏰ いつもより<br/> おそく おきました"]:::activity
+    C2 --> C3["🏭 がっこうの こうじょうけんがく"]:::location
+    C3 --> C4["🚌 えきから バスで 5ふん いきやすい"]:::activity
+    C4 --> C5["😊 ひろい<br/> ひとが たくさん　います<br/>とても おもしろい"]:::feeling
+    C5 --> C6["🔄 また べんきょうのために いきたい"]:::finish
+    
+    %% === LIN-SAN ===
+    root --> D1["👩 リンさん<br/>Lin-san"]:::person
+    D1 --> D2["🍽️ ゆっくり あさごはんを 食べたあとで<br/>でかけました"]:::activity
+    D2 --> D3["⛰️ ちかくの やま<br/>ゆうめい <br/>はるは きれい"]:::location
+    D3 --> D4["🚌 バスていから すぐ<br/> いきやすい"]:::activity
+    D4 --> D5["😊 すずしい<br/> けしきが うつくしい<br/>すこし つかれたけど<br/> たのしい"]:::feeling
+    D5 --> D6["🔄 また のぼりたいです"]:::finish
+    
+    %% === YI-SAN ===
+    root --> E1["👩 イーさん<br/>Yi-san"]:::person
+    E1 --> E2["⏰ めずらしく おそく<br/> おきました"]:::activity
+    E2 --> E3["🛍️ さいきん<br/> オープンした モール"]:::location
+    E3 --> E4["🚉 えきに ちかい <br/>とても べんり"]:::activity
+    E4 --> E5["😊 おみせが おおい<br/> にぎやか<br/>ふくは かわいい<br/>でも、 ちょっと たかい"]:::feeling
+    E5 --> E6["🔄 また セールのとき いきたい"]:::finish
+    
+    %% === PIERRE-SAN ===
+    root --> F1["👨 ピエールさん<br/>Pierre-san"]:::person
+    F1 --> F2["⏰ いつもより おそく<br/> おきました"]:::activity
+    F2 --> F3["⚽ ともだちと<br/> サッカーを します"]:::activity
+    F3 --> F4["🌳 こうえん<br/>レストランから ちかい<br/> すぐ いけます"]:::location
+    F4 --> F5["😊 ひとが おおい<br/>たのしく あそべました <br/>すこし あつい"]:::feeling
+    F5 --> F6["🔄 また サッカーを したいです"]:::finish
