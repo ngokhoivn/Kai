@@ -1,63 +1,78 @@
-var Kotoba_Bai5_data = [
-    // HOẠT ĐỘNG & THÓI QUEN
-    { id: 1, kanji: "Hoạt động cuối tuần", hiragana: "しゅうまつのかつどう", meaning: "週末の活動" },
-    { id: 2, kanji: "Thức dậy", hiragana: "おきます", meaning: "起きます" },
-    { id: 3, kanji: "Ngủ", hiragana: "ねます", meaning: "寝ます" },
-    { id: 4, kanji: "Ra ngoài", hiragana: "でかけます", meaning: "出かけます" },
-    { id: 5, kanji: "Đi ăn", hiragana: "たべにいきます", meaning: "食べに行きます" },
-    { id: 6, kanji: "Học", hiragana: "べんきょうします", meaning: "勉強します" },
-    { id: 7, kanji: "Chơi bóng đá", hiragana: "サッカーをします", meaning: "サッカーをします" },
-    { id: 8, kanji: "Leo, trèo (núi)", hiragana: "のぼります", meaning: "登ります" },
-    { id: 9, kanji: "Trải qua", hiragana: "すごします", meaning: "過ごします" },
-
-    // ĐỊA ĐIỂM
-    { id: 10, kanji: "Tiệm mì Ramen", hiragana: "ラーメンや", meaning: "ラーメン屋" },
-    { id: 11, kanji: "Công viên", hiragana: "こうえん", meaning: "公園" },
-    { id: 12, kanji: "Nhà máy, công xưởng", hiragana: "こうじょう", meaning: "工場" },
-    { id: 13, kanji: "Núi", hiragana: "やま", meaning: "山" },
-    { id: 14, kanji: "Trung tâm mua sắm", hiragana: "モール", meaning: "モール" },
-    { id: 15, kanji: "Cửa hàng", hiragana: "みせ", meaning: "店" },
-
-    // TÍNH TỪ & TRẠNG TỪ
-    { id: 16, kanji: "Muộn, trễ", hiragana: "おそく", meaning: "遅く" },
-    { id: 17, kanji: "Sớm", hiragana: "はやく", meaning: "早く" },
-    { id: 18, kanji: "Chậm, thong thả", hiragana: "ゆっくり", meaning: "ゆっくり" },
-    { id: 19, kanji: "Nổi tiếng", hiragana: "ゆうめい", meaning: "有名" },
-    { id: 20, kanji: "Náo nhiệt", hiragana: "にぎやか", meaning: "賑やか" },
-    { id: 21, kanji: "Ngon", hiragana: "おいしい", meaning: "美味しい" },
-    { id: 22, kanji: "Đắt", hiragana: "たかい", meaning: "高い" },
-    { id: 23, kanji: "Gần", hiragana: "ちかい", meaning: "近い" },
-    { id: 24, kanji: "Tiện lợi", hiragana: "べんり", meaning: "便利" },
-    { id: 25, kanji: "Nhiều", hiragana: "おおい", meaning: "多い" },
-    { id: 26, kanji: "Ít", hiragana: "すくない", meaning: "少ない" },
-    { id: 27, kanji: "Sạch, đẹp", hiragana: "きれい", meaning: "きれい" },
-    { id: 28, kanji: "Rộng", hiragana: "ひろい", meaning: "広い" },
-    { id: 29, kanji: "Thú vị", hiragana: "おもしろい", meaning: "面白い" },
-    { id: 30, kanji: "Dễ dàng (V-やすい: dễ làm gì đó)", hiragana: "やすい", meaning: "易い" },
-    { id: 31, kanji: "Mát mẻ", hiragana: "すずしい", meaning: "涼しい" },
-    { id: 32, kanji: "Đẹp (vẻ đẹp trang trọng)", hiragana: "うつくしい", meaning: "美しい" },
-    { id: 33, kanji: "Vui vẻ", hiragana: "たのしい", meaning: "楽しい" },
-    { id: 34, kanji: "Hiếm, lạ", hiragana: "めずらしい", meaning: "珍しい" },
-    { id: 35, kanji: "Dễ thương", hiragana: "かわいい", meaning: "可愛い" },
-    { id: 36, kanji: "Chật, vất vả, khắc nghiệt", hiragana: "きつい", meaning: "きつい" },
-    { id: 37, kanji: "Vắng, không đông", hiragana: "すいています", meaning: "空いています" },
-
-    // DANH TỪ & CỤM TỪ KHÁC
-    { id: 38, kanji: "Gần đây", hiragana: "さいきん", meaning: "最近" },
-    { id: 39, kanji: "Gia đình", hiragana: "かぞく", meaning: "家族" },
-    { id: 40, kanji: "Người", hiragana: "ひと", meaning: "人" },
-    { id: 41, kanji: "Không khí", hiragana: "くうき", meaning: "空気" },
-    { id: 42, kanji: "Bánh sandwich", hiragana: "サンドイッチ", meaning: "サンドイッチ" },
-    { id: 43, kanji: "Tham quan học tập", hiragana: "けんがく", meaning: "見学" },
-    { id: 44, kanji: "Vì, để cho ~", hiragana: "～のために", meaning: "～の為に" },
-    { id: 45, kanji: "Bữa sáng", hiragana: "あさごはん", meaning: "朝ごはん" },
-    { id: 46, kanji: "Phong cảnh", hiragana: "けしき", meaning: "景色" },
-    { id: 47, kanji: "Quần áo", hiragana: "ふく", meaning: "服" },
-    { id: 48, kanji: "Giảm giá (Sale)", hiragana: "セール", meaning: "セール" },
-    { id: 49, kanji: "Bạn bè", hiragana: "ともだち", meaning: "友達" },
-    { id: 50, kanji: "Hơn mọi khi", hiragana: "いつもより", meaning: "いつもより" },
-    { id: 51, kanji: "Sau khi ~", hiragana: "～あとで", meaning: "～後で" },
-    { id: 52, kanji: "Một chút", hiragana: "ちょっと", meaning: "ちょっと" },
-    { id: 53, kanji: "Nhưng", hiragana: "でも", meaning: "でも" },
-    { id: 54, kanji: "..., nhưng...", hiragana: "～けど", meaning: "～けど" }
+var Kotoba_Bai4_data = [
+    // THỜI GIAN
+    { id: 1, kanji: "Bình thường, thường ngày", hiragana: "ふつう", meaning: "普通" },
+    { id: 2, kanji: "Hàng ngày", hiragana: "まいにち", meaning: "毎日" },
+    { id: 3, kanji: "Hôm nay", hiragana: "きょう", meaning: "今日" },
+    { id: 4, kanji: "Ngày mai", hiragana: "あした", meaning: "明日" },
+    { id: 5, kanji: "Hôm qua", hiragana: "きのう", meaning: "昨日" },
+    { id: 6, kanji: "Phút", hiragana: "ふん/ぷん", meaning: "分" },
+    { id: 7, kanji: "Giờ", hiragana: "じかん", meaning: "時間" },
+    { id: 8, kanji: "Mất, tốn (thời gian)", hiragana: "かかります", meaning: "掛かります" },
+    
+    // DI CHUYỂN
+    { id: 9, kanji: "Đi", hiragana: "いきます", meaning: "行きます" },
+    { id: 10, kanji: "Đến", hiragana: "つきます", meaning: "着きます" },
+    { id: 11, kanji: "Đi qua, băng qua", hiragana: "とおります", meaning: "通ります" },
+    { id: 12, kanji: "Sử dụng", hiragana: "つかいます", meaning: "使います" },
+    { id: 13, kanji: "Bằng, với (phương tiện)", hiragana: "で", meaning: "-" },
+    { id: 14, kanji: "Từ~đến~", hiragana: "から~まで", meaning: "-" },
+    
+    // PHƯƠNG TIỆN
+    { id: 15, kanji: "Tàu điện", hiragana: "でんしゃ", meaning: "電車" },
+    { id: 16, kanji: "Xe buýt", hiragana: "バス", meaning: "-" },
+    { id: 17, kanji: "Đi bộ", hiragana: "あるいて", meaning: "歩いて" },
+    { id: 18, kanji: "Xe đạp", hiragana: "じてんしゃ", meaning: "自転車" },
+    { id: 19, kanji: "Taxi", hiragana: "タクシー", meaning: "-" },
+    { id: 20, kanji: "Ô tô", hiragana: "くるま", meaning: "車" },
+    
+    // ĐỊA ĐIỂM MỚI (không trùng Bài 3)
+    { id: 21, kanji: "Nhà", hiragana: "うち", meaning: "家" },
+    { id: 22, kanji: "Công viên", hiragana: "こうえん", meaning: "公園" },
+    { id: 23, kanji: "Nhà ga", hiragana: "えき", meaning: "駅" },
+    { id: 24, kanji: "Trạm xe buýt", hiragana: "バスてい", meaning: "バス停" },
+    { id: 25, kanji: "Quán cà phê", hiragana: "カフェ", meaning: "-" },
+    { id: 26, kanji: "Tiệm bánh mì", hiragana: "パンや", meaning: "パン屋" },
+    
+    // THỜI TIẾT - HIỆN TƯỢNG
+    { id: 27, kanji: "Thời tiết", hiragana: "てんき", meaning: "天気" },
+    { id: 28, kanji: "Tốt, đẹp (thời tiết)", hiragana: "いい", meaning: "良い" },
+    { id: 29, kanji: "Xấu (thời tiết)", hiragana: "わるい", meaning: "悪い" },
+    { id: 30, kanji: "Trời nắng", hiragana: "はれ", meaning: "晴れ" },
+    { id: 31, kanji: "Mưa", hiragana: "あめ", meaning: "雨" },
+    { id: 32, kanji: "Rơi, sa (mưa/tuyết)", hiragana: "ふります", meaning: "降ります" },
+    { id: 33, kanji: "Sắp rơi/mưa", hiragana: "ふりそう", meaning: "降りそう" },
+    { id: 34, kanji: "Trời mây", hiragana: "くもり", meaning: "曇り" },
+    { id: 35, kanji: "Tuyết", hiragana: "ゆき", meaning: "雪" },
+    { id: 36, kanji: "Gió", hiragana: "かぜ", meaning: "風" },
+    
+    // THỜI TIẾT - CẢM GIÁC
+    { id: 37, kanji: "Nóng (thời tiết)", hiragana: "あつい", meaning: "暑い" },
+    { id: 38, kanji: "Lạnh (thời tiết)", hiragana: "さむい", meaning: "寒い" },
+    { id: 39, kanji: "Mát mẻ", hiragana: "すずしい", meaning: "涼しい" },
+    { id: 40, kanji: "Ấm áp", hiragana: "あたたかい", meaning: "暖かい" },
+    { id: 41, kanji: "Mạnh (gió)", hiragana: "つよい", meaning: "強い" },
+    
+    // TÍNH TỪ VỊ TRÍ & ĐÁNH GIÁ
+    { id: 42, kanji: "Gần", hiragana: "ちかい", meaning: "近い" },
+    { id: 43, kanji: "Xa", hiragana: "とおい", meaning: "遠い" },
+    { id: 44, kanji: "Nhanh", hiragana: "はやい", meaning: "早い" },
+    { id: 45, kanji: "Chậm", hiragana: "おそい", meaning: "遅い" },
+    { id: 46, kanji: "Nguy hiểm", hiragana: "あぶない", meaning: "危ない" },
+    { id: 47, kanji: "An toàn", hiragana: "あんぜん", meaning: "安全" },
+    { id: 48, kanji: "Tiện lợi", hiragana: "べんり", meaning: "便利" },
+    { id: 49, kanji: "Bất tiện", hiragana: "ふべん", meaning: "不便" },
+    
+    // TÍNH TỪ ĐÁNH GIÁ ĐỊA ĐIỂM/PHƯƠNG TIỆN
+    { id: 50, kanji: "Nổi tiếng", hiragana: "ゆうめい", meaning: "有名" },
+    { id: 51, kanji: "Ngon", hiragana: "おいしい", meaning: "美味しい" },
+    { id: 52, kanji: "Đẹp (cảnh vật)", hiragana: "うつくしい", meaning: "美しい" },
+    { id: 53, kanji: "Vui vẻ", hiragana: "たのしい", meaning: "楽しい" },
+    { id: 54, kanji: "Tốt", hiragana: "いい", meaning: "良い" },
+    { id: 55, kanji: "Không tốt", hiragana: "よくない", meaning: "良くない" },
+    { id: 56, kanji: "Tốt, được, không sao", hiragana: "だいじょうぶ", meaning: "大丈夫" },
+    { id: 57, kanji: "Vội vàng, gấp", hiragana: "いそぐ", meaning: "急ぐ" },
+    
+    // CẢM XÚC & Ý KIẾN
+    { id: 58, kanji: "Vui mừng, hạnh phúc", hiragana: "うれしい", meaning: "嬉しい" },
+    { id: 59, kanji: "Buồn", hiragana: "かなしい", meaning: "悲しい" }
 ];
