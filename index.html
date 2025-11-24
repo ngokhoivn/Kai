@@ -4,57 +4,117 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trang chủ học tiếng Nhật</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ["Inter", "system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "sans-serif"],
+                    },
+                    colors: {
+                        brand: {
+                            900: "#020617",
+                            800: "#0f172a",
+                            700: "#1e293b",
+                            600: "#334155",
+                            500: "#3b82f6",
+                        }
+                    }
+                }
+            }
+        }
+    </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="css/Main_UI.css">
 </head>
-<body>
-    <div class="container">
-        <h1>Tiếng Nhật Online & Offline Quy Nhơn</h1>
-        <p>Địa chỉ: 22 Tô Hiến Thành, Quy Nhơn Nam</p>
-        <p>Zalo: 0762.75.66.79</p>
+<body class="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800 text-slate-50 flex items-center justify-center px-4 py-8 font-sans">
+    <div class="w-full max-w-4xl">
+        <div class="text-center space-y-2 mb-8">
+            <h1 class="text-3xl md:text-4xl font-black tracking-tight text-sky-300 drop-shadow-lg">
+                Tiếng Nhật Online &amp; Offline Quy Nhơn
+            </h1>
+            <p class="text-sm md:text-base text-slate-300">Địa chỉ: <span class="font-medium text-sky-300">22 Tô Hiến Thành, Quy Nhơn Nam</span></p>
+            <p class="text-sm md:text-base text-slate-300">Zalo: <span class="font-semibold text-emerald-300">0762.75.66.79</span></p>
+        </div>
 
-        <div class="lesson-sections-container">
-            <div class="lesson-section">
-                <div class="section-header">
-                    <h2 class="section-title"><i class="fas fa-comments"></i> Hội thoại</h2>
-                    <i class="fas fa-chevron-down toggle-arrow"></i>
+        <div class="grid gap-6 md:gap-8 md:grid-cols-2">
+            <div class="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-lg shadow-xl shadow-slate-950/40 p-5 md:p-6">
+                <div class="flex items-center justify-between mb-4 cursor-pointer select-none section-header">
+                    <h2 class="flex items-center gap-2 text-lg md:text-xl font-semibold text-sky-300">
+                        <i class="fas fa-comments"></i>
+                        <span>Hội thoại</span>
+                    </h2>
+                    <i class="fas fa-chevron-down toggle-arrow text-slate-300"></i>
                 </div>
-                <div class="lesson-list">
-                    <a href="Kaiwa_Bai1.html" class="lesson-btn">Bài 1: Hội thoại trực tiếp</a>
-                    <a href="Kaiwa_Bai2.html" class="lesson-btn">Bài 2: Hội thoại hỏi người khác</a>
-                    <a href="Kaiwa_Bai3.html" class="lesson-btn">Bài 3: Ngoại hình, tính cách</a>
-                    <a href="Kaiwa_Bai4.html" class="lesson-btn">Bài 4: Nơi chốn, thời tiết</a>
-                    <a href="Kaiwa_Bai5.html" class="lesson-btn">Bài 5: Hoạt động cuối tuần</a>
+                <div class="flex flex-col gap-3 lesson-list">
+                    <a href="Kaiwa_Bai1.html" class="lesson-btn inline-flex items-center justify-between rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm md:text-base text-slate-50 hover:bg-white/10 hover:border-sky-400/60 transition-all duration-200 shadow-sm">
+                        <span>Bài 1: Hội thoại trực tiếp</span>
+                        <i class="fas fa-arrow-right text-xs opacity-70"></i>
+                    </a>
+                    <a href="Kaiwa_Bai2.html" class="lesson-btn inline-flex items-center justify-between rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm md:text-base text-slate-50 hover:bg-white/10 hover:border-sky-400/60 transition-all duration-200 shadow-sm">
+                        <span>Bài 2: Hội thoại hỏi người khác</span>
+                        <i class="fas fa-arrow-right text-xs opacity-70"></i>
+                    </a>
+                    <a href="Kaiwa_Bai3.html" class="lesson-btn inline-flex items-center justify-between rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm md:text-base text-slate-50 hover:bg-white/10 hover:border-sky-400/60 transition-all duration-200 shadow-sm">
+                        <span>Bài 3: Ngoại hình, tính cách</span>
+                        <i class="fas fa-arrow-right text-xs opacity-70"></i>
+                    </a>
+                    <a href="Kaiwa_Bai4.html" class="lesson-btn inline-flex items-center justify-between rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm md:text-base text-slate-50 hover:bg-white/10 hover:border-sky-400/60 transition-all duration-200 shadow-sm">
+                        <span>Bài 4: Nơi chốn, thời tiết</span>
+                        <i class="fas fa-arrow-right text-xs opacity-70"></i>
+                    </a>
+                    <a href="Kaiwa_Bai5.html" class="lesson-btn inline-flex items-center justify-between rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm md:text-base text-slate-50 hover:bg-white/10 hover:border-sky-400/60 transition-all duration-200 shadow-sm">
+                        <span>Bài 5: Hoạt động cuối tuần</span>
+                        <i class="fas fa-arrow-right text-xs opacity-70"></i>
+                    </a>
                 </div>
             </div>
-            <div class="lesson-section">
-                <div class="section-header">
-                    <h2 class="section-title"><i class="fas fa-book"></i> Học từ vựng</h2>
-                    <i class="fas fa-chevron-down toggle-arrow"></i>
+            <div class="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-lg shadow-xl shadow-slate-950/40 p-5 md:p-6">
+                <div class="flex items-center justify-between mb-4 cursor-pointer select-none section-header">
+                    <h2 class="flex items-center gap-2 text-lg md:text-xl font-semibold text-emerald-300">
+                        <i class="fas fa-book"></i>
+                        <span>Học từ vựng</span>
+                    </h2>
+                    <i class="fas fa-chevron-down toggle-arrow text-slate-300"></i>
                 </div>
-                <div class="lesson-list">
-                    <a href="Kotoba.html?lesson=Kotoba_Bai1_data" class="lesson-btn">Bài 1: Giới thiệu bản thân</a>
-                    <a href="Kotoba.html?lesson=Kotoba_Bai2_data" class="lesson-btn">Bài 2: Ngoại hình, tính cách</a>
-                    <a href="Kotoba.html?lesson=Kotoba_Bai3_data" class="lesson-btn">Bài 3: Địa diểm, tính từ</a>
-                    <a href="Kotoba.html?lesson=Kotoba_Bai4_data" class="lesson-btn">Bài 4: Thời tiết, cảm xúc</a>
-                    <a href="Kotoba.html?lesson=Kotoba_Bai5_data" class="lesson-btn">Bài 5: Hoạt động cuối tuần</a>
+                <div class="flex flex-col gap-3 lesson-list">
+                    <a href="Kotoba.html?lesson=Kotoba_Bai1_data" class="lesson-btn inline-flex items-center justify-between rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm md:text-base text-slate-50 hover:bg-white/10 hover:border-emerald-400/60 transition-all duration-200 shadow-sm">
+                        <span>Bài 1: Giới thiệu bản thân</span>
+                        <i class="fas fa-arrow-right text-xs opacity-70"></i>
+                    </a>
+                    <a href="Kotoba.html?lesson=Kotoba_Bai2_data" class="lesson-btn inline-flex items-center justify-between rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm md:text-base text-slate-50 hover:bg-white/10 hover:border-emerald-400/60 transition-all duration-200 shadow-sm">
+                        <span>Bài 2: Ngoại hình, tính cách</span>
+                        <i class="fas fa-arrow-right text-xs opacity-70"></i>
+                    </a>
+                    <a href="Kotoba.html?lesson=Kotoba_Bai3_data" class="lesson-btn inline-flex items-center justify-between rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm md:text-base text-slate-50 hover:bg-white/10 hover:border-emerald-400/60 transition-all duration-200 shadow-sm">
+                        <span>Bài 3: Địa diểm, tính từ</span>
+                        <i class="fas fa-arrow-right text-xs opacity-70"></i>
+                    </a>
+                    <a href="Kotoba.html?lesson=Kotoba_Bai4_data" class="lesson-btn inline-flex items-center justify-between rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm md:text-base text-slate-50 hover:bg-white/10 hover:border-emerald-400/60 transition-all duration-200 shadow-sm">
+                        <span>Bài 4: Thời tiết, cảm xúc</span>
+                        <i class="fas fa-arrow-right text-xs opacity-70"></i>
+                    </a>
+                    <a href="Kotoba.html?lesson=Kotoba_Bai5_data" class="lesson-btn inline-flex items-center justify-between rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm md:text-base text-slate-50 hover:bg-white/10 hover:border-emerald-400/60 transition-all duration-200 shadow-sm">
+                        <span>Bài 5: Hoạt động cuối tuần</span>
+                        <i class="fas fa-arrow-right text-xs opacity-70"></i>
+                    </a>
                 </div>
             </div>
         </div>
 
-    <script>
-        document.querySelectorAll('.section-header').forEach(header => {
-            header.addEventListener('click', () => {
-                const lessonList = header.nextElementSibling;
-                const arrow = header.querySelector('.toggle-arrow');
+        <script>
+            document.querySelectorAll('.section-header').forEach(header => {
+                header.addEventListener('click', () => {
+                    const lessonList = header.nextElementSibling;
+                    const arrow = header.querySelector('.toggle-arrow');
 
-                lessonList.classList.toggle('hidden');
-                arrow.classList.toggle('fa-chevron-down');
-                arrow.classList.toggle('fa-chevron-up');
+                    lessonList.classList.toggle('hidden');
+                    arrow.classList.toggle('fa-chevron-down');
+                    arrow.classList.toggle('fa-chevron-up');
+                });
             });
-        });
-    </script>
-
+        </script>
     </div>
 </body>
 </html>
