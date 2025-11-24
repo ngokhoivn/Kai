@@ -561,11 +561,15 @@ input:checked + .slider:before {
         align-items: flex-start;
     }
 
+    .character-details {
+        justify-items: center;
+    }
+
     .detail-item {
-        flex-direction: row;
-        justify-content: space-between;
+        max-width: 260px;
+        width: 100%;
         align-items: center;
-        gap: 8px;
+        text-align: center;
     }
 
     .controls {
