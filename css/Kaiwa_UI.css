@@ -978,3 +978,221 @@ input:checked + .slider:before {
         right: 16px;
     }
 }
+
+/* ====================== MOBILE OPTIMIZATION - THÊM VÀO CUỐI FILE CSS ====================== */
+
+@media (max-width: 768px) {
+    body {
+        font-size: 15px; /* giảm base font một chút */
+        padding: 12px;
+    }
+
+    .app-header {
+        padding: 12px 16px;
+        gap: 12px;
+    }
+
+    /* Thu nhỏ progress bar */
+    .progress-bar {
+        height: 5px;
+    }
+
+    /* Question box gọn hơn */
+    .question-box {
+        padding: 18px;
+    }
+
+    .question-text {
+        font-size: 1.35rem !important;     /* giảm từ 1.6rem */
+        line-height: 1.5;
+    }
+
+    .question-translation {
+        font-size: 0.95rem;
+    }
+
+    .btn-speak {
+        width: 42px;
+        height: 42px;
+        top: 14px;
+        right: 14px;
+        font-size: 1.1rem;
+    }
+
+    /* Answer preview & word options */
+    .answer-preview {
+        padding: 18px;
+        min-height: 80px;
+        gap: 10px;
+    }
+
+    .word-options {
+        padding: 12px;
+        gap: 10px;
+        min-height: auto;
+    }
+
+    .word-block {
+        padding: 11px 16px !important;
+        font-size: 0.95rem !important;
+        min-height: 44px; /* touch target tốt */
+    }
+
+    /* Nút hành động nhỏ hơn một chút */
+    .btn {
+        padding: 11px 16px;
+        font-size: 0.9rem;
+        min-height: 44px;
+    }
+
+    .action-buttons {
+        gap: 10px;
+    }
+
+    .controls-row {
+        flex-direction: column;
+        gap: 14px;
+    }
+
+    .toggle-hints {
+        width: 100%;
+        justify-content: center;
+    }
+
+    /* Result gọn hơn */
+    .result {
+        padding: 16px;
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        font-size: 14.5px; /* nhỏ thêm chút nữa */
+        padding: 8px;
+    }
+
+    .app-container {
+        gap: 12px;
+    }
+
+    .app-header {
+        padding: 10px 12px;
+        border-radius: 14px;
+    }
+
+    /* Header: làm gọn hoàn toàn */
+    .header-left {
+        gap: 8px;
+    }
+
+    .btn-home,
+    .btn-character {
+        padding: 9px 10px !important;
+        font-size: 0;
+    }
+
+    .btn-home i,
+    .btn-character i {
+        font-size: 1.25rem;
+    }
+
+    /* Question box siêu gọn */
+    .question-box {
+        padding: 16px;
+        border-radius: 14px;
+    }
+
+    .question-text {
+        font-size: 1.25rem !important;
+        line-height: 1.45;
+    }
+
+    .question-translation {
+        font-size: 0.9rem;
+    }
+
+    .btn-speak {
+        width: 38px;
+        height: 38px;
+        top: 12px;
+        right: 12px;
+        font-size: 1rem;
+    }
+
+    /* Answer area */
+    .answer-preview {
+        padding: 14px;
+        border-radius: 12px;
+        min-height: 70px;
+    }
+
+    .word-options {
+        gap: 8px;
+        padding: 10px;
+        border-radius: 10px;
+    }
+
+    .word-block {
+        padding: 10px 14px !important;
+        font-size: 0.9rem !important;
+        border-radius: 10px;
+    }
+
+    /* Nút kiểm tra & tiếp theo xếp dọc hoặc ngang đều đẹp */
+    .action-buttons {
+        width: 100%;
+        gap: 10px;
+    }
+
+    .btn-check,
+    .btn-next {
+        flex: 1;
+        font-size: 0.9rem;
+        padding: 12px;
+    }
+
+    /* Khi màn hình rất hẹp (<380px) thì xếp dọc nút */
+    @media (max-width: 380px) {
+        .action-buttons {
+            flex-direction: column;
+        }
+        .btn-check,
+        .btn-next {
+            width: 100%;
+        }
+    }
+
+    /* Result nhỏ hơn */
+    .result {
+        padding: 14px;
+        font-size: 1.05rem;
+        border-radius: 12px;
+    }
+}
+
+/* Tối ưu chiều cao tổng thể trên mobile */
+@media (max-width: 768px) {
+    .app-main {
+        gap: 14px;
+    }
+
+    .content-area {
+        padding: 16px;
+        border-radius: 16px;
+        gap: 18px;
+    }
+
+    .conversation-area,
+    .answer-area {
+        gap: 16px;
+    }
+}
+
+/* Fix cho iPhone notch / Android status bar */
+@supports (padding-top: env(safe-area-inset-top)) {
+    body {
+        padding-top: max(12px, env(safe-area-inset-top));
+        padding-bottom: max(12px, env(safe-area-inset-bottom));
+    }
+}
