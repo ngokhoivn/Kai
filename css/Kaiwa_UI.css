@@ -317,7 +317,7 @@ body {
 }
 
 .progress-bar {
-    height: 12px;
+    height: 6px; /* thin bar thay vì quá dày */
     background: rgba(0, 0, 0, 0.4);
     border-radius: 20px;
     overflow: hidden;
@@ -772,18 +772,18 @@ input:checked + .slider:before {
 
 .btn {
     flex: 1;
-    padding: 18px 24px;
+    padding: 12px 18px;          /* nhỏ hơn để gọn lại */
     border: none;
-    border-radius: 14px;
-    font-size: 1.05rem;
+    border-radius: 12px;
+    font-size: 0.95rem;          /* chữ nhỏ hơn một chút */
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
-    min-height: 60px;
+    gap: 8px;
+    min-height: 48px;            /* thấp hơn */
     position: relative;
     overflow: hidden;
 }
@@ -917,9 +917,9 @@ input:checked + .slider:before {
         justify-content: space-between;
     }
 
+    /* Ẩn hàng thống kê để header gọn hơn trên mobile */
     .stats-row {
-        flex-wrap: wrap;
-        gap: 8px;
+        display: none;
     }
 
     .question-text {
@@ -931,7 +931,21 @@ input:checked + .slider:before {
         padding: 10px 16px;
     }
 
-}
+    /* Nút Trang chủ và Nhân vật dạng icon-only cho mobile */
+    .btn-home,
+    .btn-character {
+        padding: 8px 10px;
+        font-size: 0;              /* ẩn text, chỉ hiện icon */
+        min-width: 40px;
+    }
+
+    .btn-home i,
+    .btn-character i {
+        font-size: 1.1rem;         /* kích thước icon */
+        margin-right: 0;
+    }
+
+    /* MOBILE HEADER LAYOUT CHO KAIWA.HTML */
 
 @media (max-width: 480px) {
     body {
