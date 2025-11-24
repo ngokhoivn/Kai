@@ -548,7 +548,7 @@ const all_questions_bai5 = [
         "translation": "Có muốn chơi bóng đá nữa không?",
         "correctOrder": ["はい、", "また", "したいです。"],
         "blocks": ["はい、", "また", "したいです。", "いいえ、"]
-    }
+    },
 
     {
         "characterName": "ピエールさん (Pierre-san)",
