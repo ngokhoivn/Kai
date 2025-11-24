@@ -9,25 +9,26 @@
     <link rel="stylesheet" href="css/Kaiwa_UI.css">
 </head>
 <body>
-    <div class="container">
-        <div class="controls-panel">
-            <div class="controls-left">
+    <div class="app-container">
+        <!-- HEADER -->
+        <header class="app-header">
+            <div class="header-left">
                 <a href="index.html" class="btn-home">
                     <i class="fas fa-home"></i> Trang chủ
                 </a>
-                <div class="lesson-selector">
-                    
-                    <select id="lesson-select"></select>
-                </div>
+                <select id="lesson-select" class="lesson-select"></select>
             </div>
 
-            <div class="controls-center">
-                <div class="progress-header">
-                    
-                    <div class="progress-stats">
-                        <div class="progress-stat"><i class="fas fa-trophy"></i> <span id="score">0</span></div>
-                        <div class="progress-stat"><i class="fas fa-fire"></i> <span id="streak">0</span></div>
-                        <div class="progress-stat"><i class="fas fa-book"></i> <span id="current-question">1</span>/<span id="total-questions">5</span></div>
+            <div class="header-center">
+                <div class="stats-row">
+                    <div class="stat-item">
+                        <i class="fas fa-trophy"></i> <span id="score">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-fire"></i> <span id="streak">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-book"></i> <span id="current-question">1</span>/<span id="total-questions">5</span>
                     </div>
                 </div>
                 <div class="progress-bar">
@@ -35,54 +36,65 @@
                 </div>
             </div>
 
-            <div class="controls-right">
+            <div class="header-right">
                 <div class="character-select-wrapper" id="character-select-wrapper">
-                    <button class="character-select-toggle" id="character-select-toggle" type="button">
+                    <button class="btn-character" id="character-select-toggle" type="button">
                         <i class="fas fa-users"></i> Nhân vật
                     </button>
                     <div id="character-selection"></div>
                 </div>
             </div>
-        </div>
+        </header>
 
-        <div class="game-area">
-            <div class="character-profile" id="character-profile"></div>
+        <!-- MAIN CONTENT -->
+        <main class="app-main">
+            <!-- SIDEBAR - Character info -->
+            <aside class="sidebar">
+                <div class="character-profile" id="character-profile"></div>
+            </aside>
 
-            <div class="conversation-area">
+            <!-- CONTENT AREA -->
+            <section class="content-area">
+                <!-- Question -->
                 <div class="question-box">
                     <div class="question-text" id="question-text"></div>
                     <div class="question-translation" id="question-translation"></div>
-                    <button class="speak-question-btn" id="speak-question-btn" type="button">
+                    <button class="btn-speak" id="speak-question-btn" type="button">
                         <i class="fas fa-volume-up"></i>
                     </button>
                 </div>
 
-                <div class="sentence-builder">
-                    <div class="sentence-preview" id="sentence-preview">
+                <!-- Answer Area -->
+                <div class="answer-area">
+                    <div class="answer-preview" id="sentence-preview">
                         <span class="empty-slot"></span>
                     </div>
-                    <div class="controls-interactive">
-                        <label class="toggle-switch">
-                            <input type="checkbox" id="toggle-hints-checkbox" checked>
-                            <span class="slider"></span>
-                        </label>
-                        <label for="toggle-hints-checkbox">Hiện gợi ý</label>
+
+                    <div class="word-options" id="word-blocks-container"></div>
+
+                    <div class="controls-row">
+                        <div class="toggle-hints">
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="toggle-hints-checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                            <span>Hiện gợi ý</span>
+                        </div>
+
+                        <div class="action-buttons">
+                            <button class="btn btn-check" id="check-btn" type="button">
+                                <i class="fas fa-check"></i> Kiểm tra
+                            </button>
+                            <button class="btn btn-next" id="next-btn" type="button">
+                                <i class="fas fa-arrow-right"></i> Tiếp theo
+                            </button>
+                        </div>
                     </div>
-                    <div class="word-blocks-container" id="word-blocks-container"></div>
-                </div>
 
-                <div class="result" id="result"></div>
-
-                <div class="controls">
-                    <button class="btn btn-check" id="check-btn" type="button">
-                        <i class="fas fa-check"></i> Kiểm tra
-                    </button>
-                    <button class="btn btn-next" id="next-btn" type="button">
-                        <i class="fas fa-arrow-right"></i> Tiếp theo
-                    </button>
+                    <div class="result" id="result"></div>
                 </div>
-            </div>
-        </div>
+            </section>
+        </main>
     </div>
 
     <script>
