@@ -16,7 +16,12 @@
                 <a href="index.html" class="btn-home">
                     <i class="fas fa-home"></i> Trang chủ
                 </a>
-                <select id="lesson-select" class="lesson-select"></select>
+                <div class="character-select-wrapper" id="character-select-wrapper">
+                    <button class="btn-character" id="character-select-toggle" type="button">
+                        <i class="fas fa-users"></i> Nhân vật
+                    </button>
+                    <div id="character-selection"></div>
+                </div>
             </div>
 
             <div class="header-center">
@@ -33,15 +38,6 @@
                 </div>
                 <div class="progress-bar">
                     <div class="progress-fill" id="progress-fill"></div>
-                </div>
-            </div>
-
-            <div class="header-right">
-                <div class="character-select-wrapper" id="character-select-wrapper">
-                    <button class="btn-character" id="character-select-toggle" type="button">
-                        <i class="fas fa-users"></i> Nhân vật
-                    </button>
-                    <div id="character-selection"></div>
                 </div>
             </div>
         </header>
@@ -162,19 +158,6 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             const currentLesson = getLessonFromURL();
-            const lessonSelect = document.getElementById('lesson-select');
-
-            Object.entries(LESSON_CONFIG).forEach(([key, config]) => {
-                const option = document.createElement('option');
-                option.value = key;
-                option.textContent = config.label;
-                lessonSelect.appendChild(option);
-            });
-
-            lessonSelect.value = currentLesson;
-            lessonSelect.addEventListener('change', (event) => {
-                updateLessonParam(event.target.value);
-            });
 
             const characterWrapper = document.getElementById('character-select-wrapper');
             const characterToggle = document.getElementById('character-select-toggle');
