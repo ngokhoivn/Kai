@@ -1,0 +1,18 @@
+// Hãy thay thế nội dung này bằng nội dung thực tế của bạn
+// Use // to comment out lines
+
+// --- NHÂN VẬT ---
+// Cú pháp: Tên nhân vật, avatar
+// Ví dụ: マリアさん (Maria-san), 👩
+
+キャラクター1 (Character 1), 👩‍🦰
+キャラクター2 (Character 2), 👨‍🦱
+
+// --- CÂU HỎI ---
+// Cú pháp: Tên nhân vật; Câu hỏi; Bản dịch; Thứ tự đúng; Các khối từ
+// Ví dụ: マリアさん (Maria-san); マリアさんは、 きのう、 なにを しましたか。; Hôm qua Maria đã làm gì?; きのう、 マリアさんは、 べんきょうしました。; ["きのう、", "マリアさんは、", "べんきょうしました。", "ねました。"]
+
+キャラクター1 (Character 1); しつもん 1？; Question 1?; ["こたえ", "1"]; ["こたえ", "1", "ダミー"]
+キャラクター1 (Character 1); しつもん 2？; Question 2?; ["こたえ", "2"]; ["こたえ", "2", "ダミー"]
+キャラクター2 (Character 2); しつもん 1？; Question 1?; ["こたえ", "1"]; ["こたえ", "1", "ダミー"]
+キャラクター2 (Character 2); しつもん 2？; Question 2?; ["こたえ", "2"]; ["こたえ", "2", "ダミー"]

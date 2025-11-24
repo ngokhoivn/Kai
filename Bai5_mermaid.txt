@@ -1,0 +1,3 @@
+graph TD
+    A[Nhân vật 1] --> B(Hành động 1);
+    A --> C(Hành động 2);
