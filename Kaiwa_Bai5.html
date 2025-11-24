@@ -28,9 +28,14 @@
                     <div class="progress-fill" id="progress-fill"></div>
                 </div>
             </div>
+            <div class="character-select-wrapper">
+                <button type="button" class="character-select-toggle" id="character-select-toggle">
+                    <i class="fas fa-user"></i>
+                    <span>Chọn nhân vật</span>
+                </button>
+                <div id="character-selection" class="character-dropdown"></div>
+            </div>
         </div>
-
-        <div id="character-selection"></div>
 
         <div class="game-area">
             <div class="character-profile" id="character-profile"></div>
@@ -86,5 +91,25 @@
         }
     </script>
     <script src="js/Kaiwa_Main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const wrapper = document.querySelector('.character-select-wrapper');
+            const toggleBtn = document.getElementById('character-select-toggle');
+            const dropdown = document.getElementById('character-selection');
+
+            if (!wrapper || !toggleBtn || !dropdown) return;
+
+            toggleBtn.addEventListener('click', function (e) {
+                e.stopPropagation();
+                dropdown.classList.toggle('open');
+            });
+
+            document.addEventListener('click', function (e) {
+                if (!dropdown.contains(e.target) && !toggleBtn.contains(e.target)) {
+                    dropdown.classList.remove('open');
+                }
+            });
+        });
+    </script>
 </body>
 </html>

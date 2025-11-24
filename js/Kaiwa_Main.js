@@ -57,10 +57,16 @@ const elements = {
 
 // Initialize the game UI
 function init() {
+    // Luôn load danh sách nhân vật nếu có, để dùng cho dropdown chọn nhân vật
+    if (typeof characters !== 'undefined') {
+        loadCharacterSelection();
+    }
+
     if (typeof questions !== 'undefined') {
+        // Chế độ dùng bộ câu hỏi cố định (như Bài 1)
         kaiwaData = questions;
     } else if (typeof characters !== 'undefined') {
-        loadCharacterSelection();
+        // Chế độ sinh câu hỏi dựa trên nhân vật (như Bài 2)
         const characterIndex = getCharacterIndexFromURL();
         selectedCharacter = characters[characterIndex];
         kaiwaData = generateQuestions(selectedCharacter);
