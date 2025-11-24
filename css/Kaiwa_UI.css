@@ -901,8 +901,10 @@ input:checked + .slider:before {
     }
 
     .app-container {
-        height: calc(100vh - 24px);
+        height: auto; /* Bỏ height cố định trên mobile */
         gap: 12px;
+        min-height: 100vh;
+        overflow-y: auto;
     }
 
     .app-header {
