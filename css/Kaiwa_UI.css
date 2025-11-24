@@ -933,6 +933,33 @@ input:checked + .slider:before {
         font-size: 0.9rem;
         padding: 10px 16px;
     }
+
+    /* MOBILE HEADER LAYOUT CHO KAIWA.HTML */
+    .controls-panel {
+        display: grid;                 /* dùng grid để canh hàng chắc chắn */
+        grid-template-columns: 1fr auto; /* cột trái: progress, cột phải: nút nhân vật */
+        grid-template-rows: auto auto;   /* hàng 1: left, hàng 2: center + right */
+        grid-template-areas:
+            "left left"
+            "center right";
+        gap: 10px;
+        align-items: center;
+    }
+
+    .controls-left {
+        grid-area: left;
+        width: 100%;             /* hàng đầu: home + chọn bài chiếm full width */
+    }
+
+    .controls-center {
+        grid-area: center;       /* hàng 2, cột trái: thanh tiến độ */
+        min-width: 0;
+    }
+
+    .controls-right {
+        grid-area: right;        /* hàng 2, cột phải: nút nhân vật */
+        justify-self: end;       /* canh sát mép phải */
+    }
 }
 
 @media (max-width: 480px) {

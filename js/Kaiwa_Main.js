@@ -365,7 +365,10 @@ function loadCharacterSelection() {
                 <div class="character-name">${char.name.replace(/\s*\(.*\)/, '')}</div>
             `;
             card.addEventListener('click', () => {
-                window.location.search = `?character=${index}`;
+                // Giữ nguyên bài hiện tại (lesson) và chỉ thay đổi nhân vật
+                const url = new URL(window.location.href);
+                url.searchParams.set('character', index);
+                window.location.href = url.toString();
             });
             characterSelection.appendChild(card);
         });
