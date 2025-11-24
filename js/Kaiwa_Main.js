@@ -65,13 +65,23 @@ function init() {
     if (typeof questions !== 'undefined') {
         // Chế độ dùng bộ câu hỏi cố định (như Bài 1)
         kaiwaData = questions;
-    } else if (typeof characters !== 'undefined') {
-        // Chế độ sinh câu hỏi dựa trên nhân vật (như Bài 2)
+    } else if (typeof characters !== 'undefined' && typeof generateQuestions === 'function') {
+        // Chế độ sinh câu hỏi dựa trên nhân vật (như Bài 2-5)
         const characterIndex = getCharacterIndexFromURL();
         selectedCharacter = characters[characterIndex];
-        kaiwaData = generateQuestions(selectedCharacter);
+        if (selectedCharacter) {
+            kaiwaData = generateQuestions(selectedCharacter);
+        } else {
+            console.error("Character not found at index:", characterIndex);
+            return;
+        }
     } else {
         console.error("No questions or characters data found.");
+        console.error("Available globals:", {
+            hasQuestions: typeof questions !== 'undefined',
+            hasCharacters: typeof characters !== 'undefined',
+            hasGenerateQuestions: typeof generateQuestions === 'function'
+        });
         return;
     }
     
@@ -130,9 +140,11 @@ function loadCharacterProfile(character) {
         return;
     }
     elements.characterProfile.innerHTML = `
-        <div class="character-avatar">${character.avatar}</div>
-        <div class="character-info">
+        <div class="character-main">
+            <div class="character-avatar">${character.avatar}</div>
             <div class="character-name">${character.name}</div>
+        </div>
+        <div class="character-info">
             <div class="character-details">
                 ${Object.entries(character.details).map(([label, value]) => `
                     <div class="detail-item">
@@ -360,7 +372,5 @@ function loadCharacterSelection() {
     }
 }
 
-// Start the application khi trang đã load
-document.addEventListener('DOMContentLoaded', function() {
-    init();
-});
+// init() sẽ được gọi từ Kaiwa.html sau khi tất cả data scripts đã load xong
+// Không tự động gọi ở đây để tránh race condition

@@ -1,4 +1,4 @@
-const characters_bai5 = [
+const characters = [
     {
         name: "たなかさん (Tanaka-san)",
         avatar: "👩",

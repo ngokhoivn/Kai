@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#0a0a0a">
+    <title>Kaiwa App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="css/Kaiwa_UI.css">
+</head>
+<body>
+    <div class="container">
+        <div class="controls-panel">
+            <div class="controls-left">
+                <a href="index.html" class="btn-home">
+                    <i class="fas fa-home"></i> Trang chủ
+                </a>
+                <div class="lesson-selector">
+                    
+                    <select id="lesson-select"></select>
+                </div>
+            </div>
+
+            <div class="controls-center">
+                <div class="progress-header">
+                    
+                    <div class="progress-stats">
+                        <div class="progress-stat"><i class="fas fa-trophy"></i> <span id="score">0</span></div>
+                        <div class="progress-stat"><i class="fas fa-fire"></i> <span id="streak">0</span></div>
+                        <div class="progress-stat"><i class="fas fa-book"></i> <span id="current-question">1</span>/<span id="total-questions">5</span></div>
+                    </div>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill"></div>
+                </div>
+            </div>
+
+            <div class="controls-right">
+                <div class="character-select-wrapper" id="character-select-wrapper">
+                    <button class="character-select-toggle" id="character-select-toggle" type="button">
+                        <i class="fas fa-users"></i> Nhân vật
+                    </button>
+                    <div id="character-selection"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="game-area">
+            <div class="character-profile" id="character-profile"></div>
+
+            <div class="conversation-area">
+                <div class="question-box">
+                    <div class="question-text" id="question-text"></div>
+                    <div class="question-translation" id="question-translation"></div>
+                    <button class="speak-question-btn" id="speak-question-btn" type="button">
+                        <i class="fas fa-volume-up"></i>
+                    </button>
+                </div>
+
+                <div class="sentence-builder">
+                    <div class="sentence-preview" id="sentence-preview">
+                        <span class="empty-slot"></span>
+                    </div>
+                    <div class="controls-interactive">
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="toggle-hints-checkbox" checked>
+                            <span class="slider"></span>
+                        </label>
+                        <label for="toggle-hints-checkbox">Hiện gợi ý</label>
+                    </div>
+                    <div class="word-blocks-container" id="word-blocks-container"></div>
+                </div>
+
+                <div class="result" id="result"></div>
+
+                <div class="controls">
+                    <button class="btn btn-check" id="check-btn" type="button">
+                        <i class="fas fa-check"></i> Kiểm tra
+                    </button>
+                    <button class="btn btn-next" id="next-btn" type="button">
+                        <i class="fas fa-arrow-right"></i> Tiếp theo
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const LESSON_CONFIG = {
+            Kaiwa_Bai1: {
+                label: 'Bài 1: Hội thoại trực tiếp',
+                scripts: ['data/Kaiwa_Bai1_data.js'],
+                hasCharacters: false
+            },
+            Kaiwa_Bai2: {
+                label: 'Bài 2: Hội thoại hỏi người khác',
+                scripts: ['data/Kaiwa_Bai2_characters.js', 'data/Kaiwa_Bai2_questions.js'],
+                hasCharacters: true
+            },
+            Kaiwa_Bai3: {
+                label: 'Bài 3: Ngoại hình, tính cách',
+                scripts: ['data/Kaiwa_Bai3_characters.js', 'data/Kaiwa_Bai3_questions.js'],
+                hasCharacters: true
+            },
+            Kaiwa_Bai4: {
+                label: 'Bài 4: Nơi chốn, thời tiết',
+                scripts: ['data/Kaiwa_Bai4_characters.js', 'data/Kaiwa_Bai4_questions.js'],
+                hasCharacters: true
+            },
+            Kaiwa_Bai5: {
+                label: 'Bài 5: Hoạt động cuối tuần',
+                scripts: ['data/Kaiwa_Bai5_characters.js', 'data/Kaiwa_Bai5_questions.js'],
+                hasCharacters: true
+            }
+        };
+
+        const DEFAULT_LESSON = 'Kaiwa_Bai1';
+
+        function getLessonFromURL() {
+            const params = new URLSearchParams(window.location.search);
+            const requestedLesson = params.get('lesson');
+            if (requestedLesson && LESSON_CONFIG[requestedLesson]) {
+                return requestedLesson;
+            }
+            return DEFAULT_LESSON;
+        }
+
+        function updateLessonParam(value) {
+            const url = new URL(window.location.href);
+            url.searchParams.set('lesson', value);
+            window.location.href = url.toString();
+        }
+
+        function loadScriptsSequentially(sources, callback) {
+            if (!sources.length) {
+                callback();
+                return;
+            }
+
+            const [current, ...rest] = sources;
+            const script = document.createElement('script');
+            script.src = current;
+            script.onload = () => loadScriptsSequentially(rest, callback);
+            script.onerror = () => {
+                console.error('Không tải được dữ liệu bài học:', current);
+                callback();
+            };
+            document.body.appendChild(script);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const currentLesson = getLessonFromURL();
+            const lessonSelect = document.getElementById('lesson-select');
+
+            Object.entries(LESSON_CONFIG).forEach(([key, config]) => {
+                const option = document.createElement('option');
+                option.value = key;
+                option.textContent = config.label;
+                lessonSelect.appendChild(option);
+            });
+
+            lessonSelect.value = currentLesson;
+            lessonSelect.addEventListener('change', (event) => {
+                updateLessonParam(event.target.value);
+            });
+
+            const characterWrapper = document.getElementById('character-select-wrapper');
+            const characterToggle = document.getElementById('character-select-toggle');
+            const characterSelection = document.getElementById('character-selection');
+
+            if (!LESSON_CONFIG[currentLesson].hasCharacters) {
+                characterWrapper.style.display = 'none';
+            } else {
+                characterToggle.addEventListener('click', (event) => {
+                    event.stopPropagation();
+                    characterSelection.classList.toggle('open');
+                });
+
+                document.addEventListener('click', (event) => {
+                    if (!characterWrapper.contains(event.target)) {
+                        characterSelection.classList.remove('open');
+                    }
+                });
+            }
+
+            loadScriptsSequentially(LESSON_CONFIG[currentLesson].scripts, () => {
+                // Đợi một chút để đảm bảo tất cả biến global đã được set
+                setTimeout(() => {
+                    const mainScript = document.createElement('script');
+                    mainScript.src = 'js/Kaiwa_Main.js';
+                    mainScript.onload = () => {
+                        // Gọi init() sau khi Kaiwa_Main.js đã load xong
+                        if (typeof init === 'function') {
+                            init();
+                        } else {
+                            console.error('init() function not found in Kaiwa_Main.js');
+                        }
+                    };
+                    document.body.appendChild(mainScript);
+                }, 100);
+            });
+        });
+    </script>
+</body>
+</html>
+
