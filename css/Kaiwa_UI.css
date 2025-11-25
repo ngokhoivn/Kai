@@ -786,10 +786,7 @@ input:checked + .slider:before {
         cursor: pointer;
     }
 
-    .btn-home span,
-    .btn-character span {
-        display: none !important;
-    }
+
     
     body {
         padding: 12px;
@@ -846,10 +843,7 @@ input:checked + .slider:before {
         line-height: 0;
     }
 
-    .btn-home span,
-    .btn-character span {
-        display: none !important;
-    }
+
 
     .btn-home i,
     .btn-character i {
