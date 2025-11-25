@@ -13,12 +13,15 @@
         <!-- HEADER -->
         <header class="app-header">
             <div class="header-left">
+                <button class="btn-sidebar-toggle" id="sidebar-toggle-btn" type="button">
+                    <i class="fas fa-bars"></i>
+                </button>
                 <a href="index.html" class="btn-home">
-                    <i class="fas fa-home"></i> Trang chủ
+                    <i class="fas fa-home"></i> <span>Trang chủ</span>
                 </a>
                 <div class="character-select-wrapper" id="character-select-wrapper">
                     <button class="btn-character" id="character-select-toggle" type="button">
-                        <i class="fas fa-users"></i> Nhân vật
+                        <i class="fas fa-users"></i> <span>Nhân vật</span>
                     </button>
                     <div id="character-selection"></div>
                 </div>
@@ -45,7 +48,7 @@
         <!-- MAIN CONTENT -->
         <main class="app-main">
             <!-- SIDEBAR - Character info -->
-            <aside class="sidebar">
+            <aside class="sidebar" id="sidebar">
                 <div class="character-profile" id="character-profile"></div>
             </aside>
 
@@ -92,6 +95,7 @@
             </section>
         </main>
     </div>
+    <div id="sidebar-overlay" class="sidebar-overlay"></div>
 
     <script>
         const LESSON_CONFIG = {

@@ -52,7 +52,10 @@ const elements = {
     checkBtn: document.getElementById('check-btn'),
     progressFill: document.getElementById('progress-fill'),
     speakQuestionBtn: document.getElementById('speak-question-btn'),
-    toggleHintsCheckbox: document.getElementById('toggle-hints-checkbox')
+    toggleHintsCheckbox: document.getElementById('toggle-hints-checkbox'),
+    sidebar: document.getElementById('sidebar'),
+    sidebarToggleBtn: document.getElementById('sidebar-toggle-btn'),
+    sidebarOverlay: document.getElementById('sidebar-overlay')
 };
 
 // Initialize the game UI
@@ -103,6 +106,19 @@ function setupEventListeners() {
             elements.wordBlocksContainer.style.display = 'none';
         }
     });
+
+    // Sidebar toggle events
+    if (elements.sidebarToggleBtn && elements.sidebar && elements.sidebarOverlay) {
+        elements.sidebarToggleBtn.addEventListener('click', () => {
+            elements.sidebar.classList.toggle('open');
+            elements.sidebarOverlay.classList.toggle('open');
+        });
+
+        elements.sidebarOverlay.addEventListener('click', () => {
+            elements.sidebar.classList.remove('open');
+            elements.sidebarOverlay.classList.remove('open');
+        });
+    }
 }
 
 function loadQuestion() {

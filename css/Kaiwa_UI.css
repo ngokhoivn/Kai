@@ -724,17 +724,73 @@ input:checked + .slider:before {
 
 /* === RESPONSIVE DESIGN === */
 
+.btn-sidebar-toggle {
+    display: none; /* Hidden by default on desktop */
+}
+
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 998;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.sidebar-overlay.open {
+    opacity: 1;
+    visibility: visible;
+}
+
 /* Tablet */
 @media (max-width: 1024px) {
     .app-main {
         grid-template-columns: 1fr;
     }
-    .sidebar { display: none; }
-}
 
+    .sidebar {
+        position: fixed;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 280px;
+        z-index: 1001;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease-in-out;
+        border-radius: 0 16px 16px 0;
+    }
+
+    .sidebar.open {
+        transform: translateX(0);
+    }
+}
 
 /* ====================== MOBILE: HEADER 1 HÀNG – ĐÃ FIX HOÀN HẢO ====================== */
 @media (max-width: 768px) {
+    .btn-sidebar-toggle {
+        display: flex; /* Show hamburger button on mobile */
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        height: 44px;
+        padding: 0;
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid var(--glass-border);
+        color: var(--text-light);
+        font-size: 1.35rem;
+        cursor: pointer;
+    }
+
+    .btn-home span,
+    .btn-character span {
+        display: none !important;
+    }
+    
     body {
         padding: 12px;
         font-size: 14px;
@@ -876,15 +932,15 @@ input:checked + .slider:before {
 
 /* Mobile nhỏ hơn */
 @media (max-width: 480px) {
-    .btn-home, .btn-character { width: 40px !important; height: 40px !important; }
-    .btn-home i, .btn-character i { font-size: 1.25rem; }
+    .btn-sidebar-toggle, .btn-home, .btn-character { width: 40px !important; height: 40px !important; }
+    .btn-sidebar-toggle i, .btn-home i, .btn-character i { font-size: 1.25rem; }
     .stat-item { padding: 4px 6px; font-size: 0.75rem; }
 }
 
 @media (max-width: 360px) {
     .header-left { gap: 8px; }
-    .btn-home, .btn-character { width: 38px !important; height: 38px !important; }
-    .btn-home i, .btn-character i { font-size: 1.15rem; }
+    .btn-sidebar-toggle, .btn-home, .btn-character { width: 38px !important; height: 38px !important; }
+    .btn-sidebar-toggle i, .btn-home i, .btn-character i { font-size: 1.15rem; }
     .stats-row { gap: 6px; }
 }
 
