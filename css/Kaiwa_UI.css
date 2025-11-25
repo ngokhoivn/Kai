@@ -762,6 +762,10 @@ input:checked + .slider:before {
         transform: translateX(-100%);
         transition: transform 0.3s ease-in-out;
         border-radius: 0 16px 16px 0;
+        /* New background for mobile sidebar for better readability */
+        background: rgba(30, 41, 59, 0.95);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
     }
 
     .sidebar.open {
