@@ -676,7 +676,7 @@ input:checked + .slider:before {
         height: 44px;              /* cố định chiều cao để không bị lệch */
     }
 
-    /* Nút Home & Nhân vật – căn giữa icon tuyệt đối */
+    /* Nút Home & Nhân vật - Fix triệt để cho iOS */
     .btn-home,
     .btn-character {
         width: 44px !important;
@@ -684,10 +684,20 @@ input:checked + .slider:before {
         padding: 0 !important;
         border-radius: 12px;
         flex-shrink: 0;
+        /* Fix cho iOS: sử dụng nhiều phương pháp để ẩn text */
         text-indent: -9999px;
         overflow: hidden;
         position: relative;
         font-size: 1.35rem;
+        /* Thêm các thuộc tính sau để đảm bảo text bị ẩn hoàn toàn */
+        color: transparent !important;
+        white-space: nowrap;
+        line-height: 0;
+    }
+
+    .btn-home span,
+    .btn-character span {
+        display: none !important;
     }
 
     .btn-home i,
@@ -699,6 +709,17 @@ input:checked + .slider:before {
         margin: 0 !important;
         text-indent: 0;
         pointer-events: none;
+        /* Đảm bảo icon hiển thị đúng */
+        color: white !important;
+        font-size: 1.35rem;
+        width: auto;
+        height: auto;
+    }
+
+    /* Đảm bảo không có khoảng trống thừa */
+    .btn-home::after,
+    .btn-character::after {
+        display: none;
     }
 
     /* === PHẢI: Stats === */
