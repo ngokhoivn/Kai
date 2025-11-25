@@ -146,12 +146,26 @@ function loadCharacterProfile(character) {
         </div>
         <div class="character-info">
             <div class="character-details">
-                ${Object.entries(character.details).map(([label, value]) => `
-                    <div class="detail-item">
-                        <span class="detail-label">${label.replace(/\s*\(.*\)/, '')}:</span>
-                        <span class="detail-value">${value}</span>
-                    </div>
-                `).join('')}
+                ${Object.entries(character.details).map(([label, value]) => {
+                    const isParagraph = value.length > 30 || value.includes('<br>');
+                    const cleanLabel = label.replace(/\s*\(.*\)/, '');
+
+                    if (isParagraph) {
+                        return `
+                            <div class="detail-item paragraph">
+                                <span class="detail-label">${cleanLabel}</span>
+                                <span class="detail-value">${value}</span>
+                            </div>
+                        `;
+                    } else {
+                        return `
+                            <div class="detail-item">
+                                <span class="detail-label">${cleanLabel}:</span>
+                                <span class="detail-value">${value}</span>
+                            </div>
+                        `;
+                    }
+                }).join('')}
             </div>
         </div>
     `;

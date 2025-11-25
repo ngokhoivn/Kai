@@ -357,7 +357,7 @@ body {
 
 .detail-item {
     display: flex;
-    justify-content: space-between;
+    gap: 8px;
     padding: 10px 14px;
     background: rgba(255, 255, 255, 0.05);
     border-radius: 10px;
@@ -371,6 +371,23 @@ body {
 
 .detail-value {
     font-weight: 600;
+}
+
+.detail-item.paragraph {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+}
+
+.detail-item.paragraph .detail-label {
+    font-weight: 700;
+    color: var(--primary-light);
+}
+
+.detail-item.paragraph .detail-value {
+    font-weight: 400;
+    text-align: left;
+    line-height: 1.6;
 }
 
 /* === CONTENT AREA === */
