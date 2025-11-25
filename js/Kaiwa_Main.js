@@ -221,13 +221,56 @@ function checkAnswer() {
         return;
     }
     
-    const userAnswer = selectedWords.map(item => item.word).join(' ');
     const currentData = kaiwaData[currentQuestionIndex];
+    const userAnswer = selectedWords.map(item => item.word.trim()).join(' ');
     let isCorrect = false;
     
     // Check if the answer matches the correct order
     if (currentData.correctOrder) {
-        const correctAnswer = currentData.correctOrder.join(' ');
+        const correctAnswer = currentData.correctOrder.map(word => word.trim()).join(' ');
+        
+        // ===== DEBUG CODE - BẮT ĐẦU =====
+        console.log('=== DEBUG CHARACTER COMPARISON ===');
+        console.log('User Answer:', userAnswer);
+        console.log('Correct Answer:', correctAnswer);
+        console.log('Match:', userAnswer === correctAnswer);
+        console.log('\n--- Character by Character ---');
+        
+        // So sánh từng ký tự
+        const maxLength = Math.max(userAnswer.length, correctAnswer.length);
+        for (let i = 0; i < maxLength; i++) {
+            const userChar = userAnswer[i] || '(empty)';
+            const correctChar = correctAnswer[i] || '(empty)';
+            const userCode = userAnswer[i] ? userAnswer.charCodeAt(i) : 'N/A';
+            const correctCode = correctAnswer[i] ? correctAnswer.charCodeAt(i) : 'N/A';
+            
+            console.log(`Position ${i}:`, {
+                user: userChar,
+                userCode: userCode,
+                correct: correctChar,
+                correctCode: correctCode,
+                match: userChar === correctChar
+            });
+        }
+        
+        // So sánh từng block/word
+        console.log('\n--- Word by Word ---');
+        const userWords = selectedWords.map(item => item.word.trim());
+        const correctWords = currentData.correctOrder.map(word => word.trim());
+        
+        correctWords.forEach((correctWord, index) => {
+            const userWord = userWords[index] || '(missing)';
+            console.log(`Word ${index}:`, {
+                user: userWord,
+                userBytes: Array.from(userWord).map(c => c.charCodeAt(0)),
+                correct: correctWord,
+                correctBytes: Array.from(correctWord).map(c => c.charCodeAt(0)),
+                match: userWord === correctWord
+            });
+        });
+        console.log('=== END DEBUG ===\n');
+        // ===== DEBUG CODE - KẾT THÚC =====
+        
         isCorrect = userAnswer === correctAnswer;
     } else {
         // Fallback for multiple choice questions
