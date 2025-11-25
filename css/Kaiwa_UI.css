@@ -208,15 +208,73 @@ body {
     display: flex;
 }
 
-/* Character cards & rest of your original styles... */
-.character-card { /* giữ nguyên như cũ */ }
-.character-card::before { /* giữ nguyên */ }
-.character-card:hover::before,
-.character-card.selected::before { opacity: 1; }
+/* === CHARACTER CARDS === */
+.character-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid var(--glass-border);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    width: 90px;
+    overflow: hidden;
+}
+
+.character-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    opacity: 0;
+    transition: opacity 0.3s;
+    border-radius: 10px;
+    z-index: 0;
+}
+
+.character-card:hover::before {
+    opacity: 0.3;
+}
+
+.character-card.selected::before {
+    opacity: 0.5;
+}
+
 .character-card:hover,
-.character-card.selected { /* giữ nguyên */ }
-.character-card .character-avatar { /* giữ nguyên */ }
-.character-card .character-name { /* giữ nguyên */ }
+.character-card.selected {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(99, 102, 241, 0.5);
+    border-color: var(--primary);
+}
+
+.character-card .character-avatar {
+    position: relative;
+    z-index: 1;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+    border: 3px solid rgba(255, 255, 255, 0.1);
+}
+
+.character-card .character-name {
+    position: relative;
+    z-index: 1;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-light);
+    text-align: center;
+    white-space: nowrap;
+}
 
 /* === MAIN CONTENT === */
 .app-main {
